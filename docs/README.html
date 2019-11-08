@@ -1,0 +1,30 @@
+<h1>CFR Machine Learning</h1>
+<p><a href="https://travis-ci.org/mozilla/cfr-personalization"><img src="https://travis-ci.org/mozilla/cfr-personalization.svg?branch=master" alt="Build Status" /></a></p>
+<h1>Table of Contents (ToC):</h1>
+<ul>
+<li><a href="#how-does-it-work">How does it work?</a></li>
+<li><a href="#build-and-run-tests">Building and Running tests</a></li>
+</ul>
+<h2>How does it work?</h2>
+<p>CFR instrumentation works by reading telemetry pings directly from
+'live' tables.</p>
+<p>Those pings go through a ML pass to generate a new set of weights and
+we write directly into Remote Settings.</p>
+<p>TODO: write more about ML layer here</p>
+<p>Some terminology is important:</p>
+<p>In the context of Remote Settings, CFR uses the 'main' bucket.</p>
+<p>Each 'Provider ID' in the about:newtab#devtools page is called a
+'collection' in Remote Settings.</p>
+<p>To minimize impact on production, we constrain the places where
+we can write into the 'main' bucket.</p>
+<p><img src="./rs_collections.jpg" alt="Collections are not 'Buckets'" title="Collections are not Buckets" /></p>
+<p>CFR-Personalization will:
+* <em>only</em> operate on collections within the 'main' bucket
+* <em>only</em> write to buckets with a prefix 'cfr-exp-'
+* all writes to a collection will first be validated</p>
+<h2>Building and running tests</h2>
+<p>You should be able to build cfr-personalization using Python 3.7</p>
+<p>To run the testsuite, execute ::</p>
+<pre><code class="language-python">$ python setup.py develop
+$ python setup.py test
+</code></pre>
