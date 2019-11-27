@@ -3,42 +3,48 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 
-import requests
-from decouple import config
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+from cfretl import settings
 
-KINTO_USER = config("KINTO_USER", None)
-KINTO_PASS = config("KINTO_PASS", None)
+import json
+from jsonschema import validate
 
 
 class CFRRemoteSettings:
     """
     This class can manage the Remote Settings server for CFR
     experimentation.
+
+    We only write to a single collection: 'cfr-experiment'
+
+    The other collections related to this experiment must be loaded
+    manually and go through the regular dual sign off process.
+
+    For reference, those collections are called:
+
+    'cfr-control' and 'cfr-models'.
+
+    See "CFR Machine Learning Experiment" doc for full details.
     """
 
-    def __init__(self, kinto_uri, kinto_bucket, kinto_user, kinto_pass, prefix_filter="cfr-exp"):
-        self._kinto_uri = kinto_uri
-        self._kinto_bucket = kinto_bucket
-        self._kinto_user = kinto_user
-        self._kinto_pass = kinto_pass
+    def __init__(self):
+        self._kinto_uri = settings.KINTO_URI
+        self._kinto_bucket = settings.KINTO_BUCKET
+        self._kinto_user = settings.KINTO_USER
+        self._kinto_pass = settings.KINTO_PASS
 
-    def get_cfr_collections(self):
-        """
-        Return a list of collection names with the 'cfr' prefix
-        """
-        requests.get()
-        pass
+        self._schema = None
 
-    def clone_cfr_collection(self, src_name, dst_name):
-        """
-        Copy a collection from src_name to dst_name within the bucket
-        """
-        pass
+    @property
+    def schema(self):
+        if self._schema is None:
+            from pkg_resources import resource_filename as resource
+            self._schema = json.load(open(resource("cfretl", "schemas/cfr_weights.json"), "r"))
+        return self._schema
 
-    def update_cfr_collection(self, collection):
-        pass
-
-
-def write_json():
-    pass
+    def update_weight_vector(self, json_data):
+        validate(json_data, self.schema)
+        return 200

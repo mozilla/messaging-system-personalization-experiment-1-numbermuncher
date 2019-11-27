@@ -11,7 +11,7 @@ from datetime import timedelta
 import datetime
 import pytz
 import contextlib
-from cfretl import CFR_VECTOR_WIDTH
+from cfretl.settings import CFR_VECTOR_WIDTH
 from jsonschema import validate
 
 LIMIT_CLAUSE = ""
@@ -83,7 +83,8 @@ class BQPingLoader:
     @contextlib.contextmanager
     def compute_new_vector(self):
         # TODO: implement the model update here
-        yield [1, 2, 3, 4, 5]
+        # for now we just return a dummy vecgtor
+        yield [1, 2, 3, 4, 5, 6, 7]
 
     def validate_vector(self, vector):
         """

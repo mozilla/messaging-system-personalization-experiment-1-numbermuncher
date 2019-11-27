@@ -1,0 +1,254 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "BOOKMARK_SYNC_CFR",
+    "CRYPTOMINERS_PROTECTION",
+    "CRYPTOMINERS_PROTECTION_71",
+    "FACEBOOK_CONTAINER_3",
+    "FACEBOOK_CONTAINER_3_72",
+    "FINGERPRINTERS_PROTECTION",
+    "FINGERPRINTERS_PROTECTION_71",
+    "GOOGLE_TRANSLATE_3",
+    "GOOGLE_TRANSLATE_3_72",
+    "MILESTONE_MESSAGE",
+    "PDF_URL_FFX_SEND",
+    "PIN_TAB",
+    "PIN_TAB_72",
+    "SAVE_LOGIN",
+    "SAVE_LOGIN_72",
+    "SEND_RECIPE_TAB_CFR",
+    "SEND_TAB_CFR",
+    "SOCIAL_TRACKING_PROTECTION",
+    "SOCIAL_TRACKING_PROTECTION_71",
+    "WNP_MOMENTS_1",
+    "WNP_MOMENTS_2",
+    "WNP_MOMENTS_SYNC",
+    "YOUTUBE_ENHANCE_3",
+    "YOUTUBE_ENHANCE_3_72"
+  ],
+  "properties": {
+    "BOOKMARK_SYNC_CFR": {
+      "$id": "#/properties/BOOKMARK_SYNC_CFR",
+      "type": "integer",
+      "title": "The Bookmark_sync_cfr Schema",
+      "default": 0,
+      "examples": [
+        10476
+      ]
+    },
+    "CRYPTOMINERS_PROTECTION": {
+      "$id": "#/properties/CRYPTOMINERS_PROTECTION",
+      "type": "integer",
+      "title": "The Cryptominers_protection Schema",
+      "default": 0,
+      "examples": [
+        824
+      ]
+    },
+    "CRYPTOMINERS_PROTECTION_71": {
+      "$id": "#/properties/CRYPTOMINERS_PROTECTION_71",
+      "type": "integer",
+      "title": "The Cryptominers_protection_71 Schema",
+      "default": 0,
+      "examples": [
+        409
+      ]
+    },
+    "FACEBOOK_CONTAINER_3": {
+      "$id": "#/properties/FACEBOOK_CONTAINER_3",
+      "type": "integer",
+      "title": "The Facebook_container_3 Schema",
+      "default": 0,
+      "examples": [
+        12149
+      ]
+    },
+    "FACEBOOK_CONTAINER_3_72": {
+      "$id": "#/properties/FACEBOOK_CONTAINER_3_72",
+      "type": "integer",
+      "title": "The Facebook_container_3_72 Schema",
+      "default": 0,
+      "examples": [
+        4506
+      ]
+    },
+    "FINGERPRINTERS_PROTECTION": {
+      "$id": "#/properties/FINGERPRINTERS_PROTECTION",
+      "type": "integer",
+      "title": "The Fingerprinters_protection Schema",
+      "default": 0,
+      "examples": [
+        4012
+      ]
+    },
+    "FINGERPRINTERS_PROTECTION_71": {
+      "$id": "#/properties/FINGERPRINTERS_PROTECTION_71",
+      "type": "integer",
+      "title": "The Fingerprinters_protection_71 Schema",
+      "default": 0,
+      "examples": [
+        3657
+      ]
+    },
+    "GOOGLE_TRANSLATE_3": {
+      "$id": "#/properties/GOOGLE_TRANSLATE_3",
+      "type": "integer",
+      "title": "The Google_translate_3 Schema",
+      "default": 0,
+      "examples": [
+        2286
+      ]
+    },
+    "GOOGLE_TRANSLATE_3_72": {
+      "$id": "#/properties/GOOGLE_TRANSLATE_3_72",
+      "type": "integer",
+      "title": "The Google_translate_3_72 Schema",
+      "default": 0,
+      "examples": [
+        12066
+      ]
+    },
+    "MILESTONE_MESSAGE": {
+      "$id": "#/properties/MILESTONE_MESSAGE",
+      "type": "integer",
+      "title": "The Milestone_message Schema",
+      "default": 0,
+      "examples": [
+        1679
+      ]
+    },
+    "PDF_URL_FFX_SEND": {
+      "$id": "#/properties/PDF_URL_FFX_SEND",
+      "type": "integer",
+      "title": "The Pdf_url_ffx_send Schema",
+      "default": 0,
+      "examples": [
+        11087
+      ]
+    },
+    "PIN_TAB": {
+      "$id": "#/properties/PIN_TAB",
+      "type": "integer",
+      "title": "The Pin_tab Schema",
+      "default": 0,
+      "examples": [
+        12135
+      ]
+    },
+    "PIN_TAB_72": {
+      "$id": "#/properties/PIN_TAB_72",
+      "type": "integer",
+      "title": "The Pin_tab_72 Schema",
+      "default": 0,
+      "examples": [
+        14617
+      ]
+    },
+    "SAVE_LOGIN": {
+      "$id": "#/properties/SAVE_LOGIN",
+      "type": "integer",
+      "title": "The Save_login Schema",
+      "default": 0,
+      "examples": [
+        8935
+      ]
+    },
+    "SAVE_LOGIN_72": {
+      "$id": "#/properties/SAVE_LOGIN_72",
+      "type": "integer",
+      "title": "The Save_login_72 Schema",
+      "default": 0,
+      "examples": [
+        1424
+      ]
+    },
+    "SEND_RECIPE_TAB_CFR": {
+      "$id": "#/properties/SEND_RECIPE_TAB_CFR",
+      "type": "integer",
+      "title": "The Send_recipe_tab_cfr Schema",
+      "default": 0,
+      "examples": [
+        9674
+      ]
+    },
+    "SEND_TAB_CFR": {
+      "$id": "#/properties/SEND_TAB_CFR",
+      "type": "integer",
+      "title": "The Send_tab_cfr Schema",
+      "default": 0,
+      "examples": [
+        6912
+      ]
+    },
+    "SOCIAL_TRACKING_PROTECTION": {
+      "$id": "#/properties/SOCIAL_TRACKING_PROTECTION",
+      "type": "integer",
+      "title": "The Social_tracking_protection Schema",
+      "default": 0,
+      "examples": [
+        520
+      ]
+    },
+    "SOCIAL_TRACKING_PROTECTION_71": {
+      "$id": "#/properties/SOCIAL_TRACKING_PROTECTION_71",
+      "type": "integer",
+      "title": "The Social_tracking_protection_71 Schema",
+      "default": 0,
+      "examples": [
+        488
+      ]
+    },
+    "WNP_MOMENTS_1": {
+      "$id": "#/properties/WNP_MOMENTS_1",
+      "type": "integer",
+      "title": "The Wnp_moments_1 Schema",
+      "default": 0,
+      "examples": [
+        1535
+      ]
+    },
+    "WNP_MOMENTS_2": {
+      "$id": "#/properties/WNP_MOMENTS_2",
+      "type": "integer",
+      "title": "The Wnp_moments_2 Schema",
+      "default": 0,
+      "examples": [
+        3582
+      ]
+    },
+    "WNP_MOMENTS_SYNC": {
+      "$id": "#/properties/WNP_MOMENTS_SYNC",
+      "type": "integer",
+      "title": "The Wnp_moments_sync Schema",
+      "default": 0,
+      "examples": [
+        3811
+      ]
+    },
+    "YOUTUBE_ENHANCE_3": {
+      "$id": "#/properties/YOUTUBE_ENHANCE_3",
+      "type": "integer",
+      "title": "The Youtube_enhance_3 Schema",
+      "default": 0,
+      "examples": [
+        8279
+      ]
+    },
+    "YOUTUBE_ENHANCE_3_72": {
+      "$id": "#/properties/YOUTUBE_ENHANCE_3_72",
+      "type": "integer",
+      "title": "The Youtube_enhance_3_72 Schema",
+      "default": 0,
+      "examples": [
+        9863
+      ]
+    }
+  }
+}
+
+
+
