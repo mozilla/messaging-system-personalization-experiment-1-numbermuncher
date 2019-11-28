@@ -9,6 +9,7 @@ import pytest
 import random
 from cfretl.remote_settings import CFRRemoteSettings
 
+# Set a fixed random seed so that tests are stable
 random.seed(42)
 
 CFR_IDS = [

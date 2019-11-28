@@ -19,6 +19,10 @@ CFR_EXPERIMENT = "cfr-experiment"
 CFR_CONTROL = "cfr-control"
 
 
+class SecurityError(Exception):
+    pass
+
+
 class CFRRemoteSettings:
     """
     This class can manage the Remote Settings server for CFR
@@ -61,14 +65,14 @@ class CFRRemoteSettings:
         resp = requests.get(url)
         return resp.status_code >= 200 and resp.status_code < 300
 
-    def check_weights_exists(self):
-        return self._check_collection_exists(self._weight_collection)
+    def check_experiment_exists(self):
+        return self._check_collection_exists(CFR_EXPERIMENT)
 
     def check_control_exists(self):
-        return self._check_collection_exists(self._control_collection)
+        return self._check_collection_exists(CFR_CONTROL)
 
     def check_model_exists(self):
-        return self._check_collection_exists(self._model_collection)
+        return self._check_collection_exists(CFR_MODELS)
 
     def _create_collection(self, id):
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
@@ -78,7 +82,7 @@ class CFRRemoteSettings:
         ).status_code
         return status_code >= 200 and status_code < 300
 
-    def create_weights_collection(self):
+    def create_experiment_collection(self):
         return self._create_collection(CFR_EXPERIMENT)
 
     def create_control_collection(self):
@@ -90,10 +94,15 @@ class CFRRemoteSettings:
     def write_weights(self, json_data):
         jsonschema.validate(json_data, self.schema)
 
+        if not self.check_experiment_exists():
+            if not self.create_experiment_collection():
+                raise SecurityError("CFR-Experiment collection could not be created.")
+
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
         url = "{base_uri:s}/buckets/main/collections/{id:s}".format(
             base_uri=self._kinto_uri, id=CFR_EXPERIMENT
         )
 
-        resp = requests.post(url, json=json_data, auth=auth)
+        resp = requests.put(url, json={"data": json_data}, auth=auth)
+
         return resp.status_code >= 200 and resp.status_code < 300
