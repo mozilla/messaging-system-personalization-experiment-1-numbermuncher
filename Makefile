@@ -1,5 +1,7 @@
 .PHONY: build up tests flake8 ci tests-with-cov
 
+all: build
+
 pytest:
 	python setup.py develop
 	python setup.py test

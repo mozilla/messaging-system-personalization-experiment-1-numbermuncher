@@ -24,7 +24,6 @@ joblib==0.14.0
 jsonschema==3.1.1
 mccabe==0.6.1
 more-itertools==7.2.0
--e git+git@github.com:mozilla/cfr-personalization.git@5a86e2bc362266f75e5512e97bcc999691b62aa9#egg=mozilla_cfr_personalization
 numpy==1.17.3
 packaging==19.2
 pandas==0.25.3

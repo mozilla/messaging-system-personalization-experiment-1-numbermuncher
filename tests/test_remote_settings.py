@@ -44,10 +44,9 @@ def WEIGHT_VECTOR():
     return dict(zip(CFR_IDS, [random.randint(0, 16000) for i in range(len(CFR_IDS))]))
 
 
-def test_update_vector(WEIGHT_VECTOR):
+def test_write_weights(WEIGHT_VECTOR):
     cfr_remote = CFRRemoteSettings()
-    results = cfr_remote.update_weight_vector(WEIGHT_VECTOR)
-    assert results == 200
+    assert cfr_remote.write_weights(WEIGHT_VECTOR)
 
 
 @pytest.mark.skip

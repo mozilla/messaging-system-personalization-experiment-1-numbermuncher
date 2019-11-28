@@ -11,6 +11,6 @@ CFR_VECTOR_WIDTH = config("CFR_VECTOR_WIDTH", 7)
 
 KINTO_BUCKET = "main"
 
-KINTO_URI = config("KINTO_URI", "http://localhost:8888/v1/")
+KINTO_URI = config("KINTO_URI", "http://localhost:8888/v1")
 KINTO_USER = config("KINTO_USER", "admin")
-KINTO_PASS = config("KINTO_PASS", "admin")
+KINTO_PASS = config("KINTO_PASS", "s3cr3t")
