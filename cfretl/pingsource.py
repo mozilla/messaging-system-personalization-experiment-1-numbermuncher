@@ -11,7 +11,6 @@ from datetime import timedelta
 import datetime
 import pytz
 import contextlib
-from cfretl.settings import CFR_VECTOR_WIDTH
 from jsonschema import validate
 
 LIMIT_CLAUSE = ""
@@ -100,8 +99,8 @@ class BQPingLoader:
             "properties": {
                 "weights": {
                     "type": "array",
-                    "minItems": CFR_VECTOR_WIDTH,
-                    "maxItems": CFR_VECTOR_WIDTH,
+                    "minItems": 24,
+                    "maxItems": 24,
                     "items": {"type": "integer"},
                 }
             },

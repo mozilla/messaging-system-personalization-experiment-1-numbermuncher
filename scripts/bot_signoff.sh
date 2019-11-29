@@ -66,7 +66,7 @@ curl -X PATCH $SERVER/buckets/main/groups/cfr-control-reviewers \
 
 # Generate some dummy data in the cfr-models bucket
 
-curl -X PUT ${SERVER}/buckets/main-workspace/collections/cfr-experiment/records/5ba22305-6a9e-4f2b-beee-0a0a84d44708 \
+curl -X PUT ${SERVER}/buckets/main/collections/cfr-models/records/cfr-models \
          -H 'Content-Type:application/json' \
          -d "{\"data\": {\"property\": 321.1}}" \
          -u ${BASIC_AUTH} --verbose

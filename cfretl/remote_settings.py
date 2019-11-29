@@ -23,12 +23,14 @@ class SecurityError(Exception):
     pass
 
 
+class CloneError(Exception):
+    pass
+
+
 class CFRRemoteSettings:
     """
     This class can manage the Remote Settings server for CFR
     experimentation.
-
-    We only write to a single collection: 'cfr-experiment'
 
     The other collections related to this experiment must be loaded
     manually and go through the regular dual sign off process.
@@ -78,7 +80,7 @@ class CFRRemoteSettings:
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
         url = "{base_uri:s}/buckets/main/collections".format(base_uri=self._kinto_uri)
         status_code = requests.post(
-            url, json={"data": {"id": CFR_EXPERIMENT}}, auth=auth
+            url, json={"data": {"id": id}}, auth=auth
         ).status_code
         return status_code >= 200 and status_code < 300
 
@@ -91,18 +93,70 @@ class CFRRemoteSettings:
     def create_model_collection(self):
         return self._create_collection(CFR_MODELS)
 
-    def write_weights(self, json_data):
-        jsonschema.validate(json_data, self.schema)
+    def _test_read_models(self):
+        """
+        Read the model from RemoteSettings.  This method is only used
+        for testing
+        """
+        try:
+            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{c_id:s}".format(
+                base_uri=self._kinto_uri, c_id=CFR_MODELS
+            )
+            resp = requests.get(url)
+            jdata = resp.json()["data"]
+            del jdata["id"]
+            del jdata["last_modified"]
+        except Exception:
+            # This method is only used for testing purposes - it's
+            # safe to just re-raise the exception here
+            raise
+        return jdata
 
-        if not self.check_experiment_exists():
-            if not self.create_experiment_collection():
-                raise SecurityError("CFR-Experiment collection could not be created.")
+    def write_models(self, json_data):
+        jsonschema.validate(json_data, self.schema)
+        if not self.check_model_exists():
+            if not self.create_model_collection():
+                raise SecurityError("cfr-model collection could not be created.")
 
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
-        url = "{base_uri:s}/buckets/main/collections/{id:s}".format(
-            base_uri=self._kinto_uri, id=CFR_EXPERIMENT
+        url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{c_id:s}".format(
+            base_uri=self._kinto_uri, c_id=CFR_MODELS
         )
 
-        resp = requests.put(url, json={"data": json_data}, auth=auth)
+        jdata = {"data": json_data}
+        resp = requests.put(url, json=jdata, auth=auth)
 
         return resp.status_code >= 200 and resp.status_code < 300
+
+    def cfr_records(self):
+        url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
+            base_uri=self._kinto_uri, c_id="cfr"
+        )
+        resp = requests.get(url)
+        jdata = resp.json()["data"]
+        cfr_records = jdata["data"]
+        return cfr_records
+
+    def clone_to_cfr_control(self, cfr_data):
+        """
+        Read the model from RemoteSettings.  This method is only used
+        for testing
+        """
+
+        if not self.check_control_exists():
+            if not self.create_control_collection():
+                raise SecurityError("cfr-model collection could not be created.")
+
+        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
+
+        for obj in cfr_data:
+            # Extract the record ID so we can address it directly into
+            # the cfr-control bucket
+            obj_id = obj["id"]
+
+            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{obj_id:s}".format(
+                base_uri=self._kinto_uri, c_id=CFR_CONTROL, obj_id=obj_id
+            )
+            resp = requests.put(url, json={'data': obj}, auth=auth)
+            if resp.status_code > 299:
+                raise CloneError("Error cloning CFR record id: {}".format(obj_id))

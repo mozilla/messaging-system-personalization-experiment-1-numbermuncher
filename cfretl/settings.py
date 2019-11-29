@@ -7,10 +7,8 @@ from decouple import config
 
 # Default CFR Vector width is 7
 
-CFR_VECTOR_WIDTH = config("CFR_VECTOR_WIDTH", 7)
-
 KINTO_BUCKET = "main"
 
-KINTO_URI = config("KINTO_URI", "http://localhost:8888/v1")
-KINTO_USER = config("KINTO_USER", "admin")
-KINTO_PASS = config("KINTO_PASS", "s3cr3t")
+KINTO_URI = config("KINTO_URI", "https://kinto.dev.mozaws.net/v1")
+KINTO_USER = config("KINTO_USER", "cfr-bot")
+KINTO_PASS = config("KINTO_PASS", "botpass")

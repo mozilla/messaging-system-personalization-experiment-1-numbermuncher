@@ -40,6 +40,17 @@ CFR_IDS = [
 ]
 
 
+def _compare_weights(expected, actual):
+    sorted_e_keys = sorted(expected.keys())
+    sorted_a_keys = sorted(actual.keys())
+    assert sorted_e_keys == sorted_a_keys
+
+    sorted_e_weights = [expected[k] for k in sorted_e_keys]
+    sorted_a_weights = [actual[k] for k in sorted_e_keys]
+
+    assert sorted_e_weights == sorted_a_weights
+
+
 @pytest.fixture
 def WEIGHT_VECTOR():
     return dict(zip(CFR_IDS, [random.randint(0, 16000) for i in range(len(CFR_IDS))]))
@@ -47,17 +58,28 @@ def WEIGHT_VECTOR():
 
 def test_write_weights(WEIGHT_VECTOR):
     cfr_remote = CFRRemoteSettings()
-    assert cfr_remote.write_weights(WEIGHT_VECTOR)
+    assert cfr_remote.write_models(WEIGHT_VECTOR)
+    actual = cfr_remote._test_read_models()
+    _compare_weights(WEIGHT_VECTOR, actual)
 
 
-@pytest.mark.skip
-def test_clone_collection():
-    pass
+def test_update_weights(WEIGHT_VECTOR):
+    cfr_remote = CFRRemoteSettings()
+
+    # Pick a key
+    key = iter(WEIGHT_VECTOR.keys()).__next__()
+
+    for _ in range(3):
+        WEIGHT_VECTOR[key] += 1
+        assert cfr_remote.write_models(WEIGHT_VECTOR)
+
+        actual = cfr_remote._test_read_models()
+        _compare_weights(WEIGHT_VECTOR, actual)
 
 
-@pytest.mark.skip
-def test_update_collection():
-    pass
+def test_clone_into_cfr_control(MOCK_CFR_DATA):
+    cfr_remote = CFRRemoteSettings()
+    cfr_remote.clone_to_cfr_control(MOCK_CFR_DATA)
 
 
 @pytest.mark.skip

@@ -2,11 +2,18 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-import pytest
 from unittest.mock import MagicMock
-from cfretl.pingsource import BQPingLoader
 import datetime
+import json
+import pytest
 import pytz
+
+from cfretl.pingsource import BQPingLoader
+
+import os
+
+parent = os.path.split(__file__)
+FIXTURE_PATH = os.path.join(os.path.split(__file__)[0], "fixtures")
 
 
 @pytest.fixture
@@ -43,6 +50,13 @@ def bqpl(FIXTURE_JSON):
     bqpl.get_pings = MagicMock(return_value=[FIXTURE_JSON])
 
     # Clobber the model generation
-    bqpl.compute_vector_weights = MagicMock(return_value={'weights': [2, 5, 9, 23, 5, 8, 12]})
+    bqpl.compute_vector_weights = MagicMock(
+        return_value={"weights": [2, 5, 9, 23, 5, 8, 12]}
+    )
 
     return bqpl
+
+
+@pytest.fixture
+def MOCK_CFR_DATA():
+    return json.load(open(os.path.join(FIXTURE_PATH, "cfr.json")))['data']
