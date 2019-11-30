@@ -23,7 +23,7 @@ class SecurityError(Exception):
     pass
 
 
-class CloneError(Exception):
+class RemoteSettingWriteError(Exception):
     pass
 
 
@@ -93,6 +93,32 @@ class CFRRemoteSettings:
     def create_model_collection(self):
         return self._create_collection(CFR_MODELS)
 
+    def _test_read_cfr_control(self):
+        try:
+            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
+                base_uri=self._kinto_uri, c_id=CFR_CONTROL
+            )
+            resp = requests.get(url)
+            jdata = resp.json()["data"]
+        except Exception:
+            # This method is only used for testing purposes - it's
+            # safe to just re-raise the exception here
+            raise
+        return jdata
+
+    def _test_read_cfr_experimental(self):
+        try:
+            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
+                base_uri=self._kinto_uri, c_id=CFR_EXPERIMENT
+            )
+            resp = requests.get(url)
+            jdata = resp.json()["data"]
+        except Exception:
+            # This method is only used for testing purposes - it's
+            # safe to just re-raise the exception here
+            raise
+        return jdata
+
     def _test_read_models(self):
         """
         Read the model from RemoteSettings.  This method is only used
@@ -137,16 +163,7 @@ class CFRRemoteSettings:
         cfr_records = jdata["data"]
         return cfr_records
 
-    def clone_to_cfr_control(self, cfr_data):
-        """
-        Read the model from RemoteSettings.  This method is only used
-        for testing
-        """
-
-        if not self.check_control_exists():
-            if not self.create_control_collection():
-                raise SecurityError("cfr-model collection could not be created.")
-
+    def _clone_cfr_to(self, cfr_data, c_id):
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
 
         for obj in cfr_data:
@@ -155,8 +172,49 @@ class CFRRemoteSettings:
             obj_id = obj["id"]
 
             url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{obj_id:s}".format(
-                base_uri=self._kinto_uri, c_id=CFR_CONTROL, obj_id=obj_id
+                base_uri=self._kinto_uri, c_id=c_id, obj_id=obj_id
             )
-            resp = requests.put(url, json={'data': obj}, auth=auth)
+            resp = requests.put(url, json={"data": obj}, auth=auth)
             if resp.status_code > 299:
-                raise CloneError("Error cloning CFR record id: {}".format(obj_id))
+                raise RemoteSettingWriteError(
+                    "Error cloning CFR record id: {}".format(obj_id)
+                )
+
+    def clone_to_cfr_control(self, cfr_data):
+        """
+        Read the model from RemoteSettings.  This method is only used
+        for testing
+        """
+        if not self.check_control_exists():
+            if not self.create_control_collection():
+                raise SecurityError(
+                    "{} collection could not be created.".format(CFR_CONTROL)
+                )
+
+        return self._clone_cfr_to(cfr_data, CFR_CONTROL)
+
+    def clone_to_cfr_experiment(self, cfr_data):
+        """
+        Read the model from RemoteSettings.  This method is only used
+        for testing
+        """
+        if not self.check_experiment_exists():
+            if not self.create_experiment_collection():
+                raise SecurityError(
+                    "{} collection could not be created.".format(CFR_EXPERIMENT)
+                )
+
+        self._clone_cfr_to(cfr_data, CFR_EXPERIMENT)
+        # Write in the targetting attribute
+
+        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
+        obj_id = "targetting"
+        url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{obj_id:s}".format(
+            base_uri=self._kinto_uri, c_id=CFR_EXPERIMENT, obj_id=obj_id
+        )
+        obj = {"targetting": "scores.PERSONALIZED_CFR_MESSAGE > scoreThreshold"}
+        resp = requests.put(url, json={"data": obj}, auth=auth)
+        if resp.status_code > 299:
+            raise RemoteSettingWriteError(
+                "Error writing targetting expression to experiment bucket"
+            )
