@@ -33,6 +33,9 @@ Settings at https://kinto.dev.mozaws.net/v1 and start writing out
 weight updates.  Updates are currently set as a constant of 1 second
 updates to ease testing.
 
+The `run` target will automatically set the GCloud OAuth token as an
+enviroment variable in your docker container for you.
+
 ```
 make run
 ```
