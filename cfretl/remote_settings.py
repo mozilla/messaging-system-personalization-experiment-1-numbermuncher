@@ -179,6 +179,7 @@ class CFRRemoteSettings:
                 raise RemoteSettingWriteError(
                     "Error cloning CFR record id: {}".format(obj_id)
                 )
+        return True
 
     def clone_to_cfr_control(self, cfr_data):
         """
@@ -204,7 +205,9 @@ class CFRRemoteSettings:
                     "{} collection could not be created.".format(CFR_EXPERIMENT)
                 )
 
-        self._clone_cfr_to(cfr_data, CFR_EXPERIMENT)
+        if not self._clone_cfr_to(cfr_data, CFR_EXPERIMENT):
+            return False
+
         # Write in the targetting attribute
 
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
@@ -218,3 +221,4 @@ class CFRRemoteSettings:
             raise RemoteSettingWriteError(
                 "Error writing targetting expression to experiment bucket"
             )
+        return True

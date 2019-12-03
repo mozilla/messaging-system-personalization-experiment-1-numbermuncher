@@ -5,39 +5,9 @@
 """
 These tests exercise the connector to Remote Settings
 """
-import pytest
-import random
 from cfretl.remote_settings import CFRRemoteSettings
 
-# Set a fixed random seed so that tests are stable
-random.seed(42)
-
-CFR_IDS = [
-    "BOOKMARK_SYNC_CFR",
-    "CRYPTOMINERS_PROTECTION",
-    "CRYPTOMINERS_PROTECTION_71",
-    "FACEBOOK_CONTAINER_3",
-    "FACEBOOK_CONTAINER_3_72",
-    "FINGERPRINTERS_PROTECTION",
-    "FINGERPRINTERS_PROTECTION_71",
-    "GOOGLE_TRANSLATE_3",
-    "GOOGLE_TRANSLATE_3_72",
-    "MILESTONE_MESSAGE",
-    "PDF_URL_FFX_SEND",
-    "PIN_TAB",
-    "PIN_TAB_72",
-    "SAVE_LOGIN",
-    "SAVE_LOGIN_72",
-    "SEND_RECIPE_TAB_CFR",
-    "SEND_TAB_CFR",
-    "SOCIAL_TRACKING_PROTECTION",
-    "SOCIAL_TRACKING_PROTECTION_71",
-    "WNP_MOMENTS_1",
-    "WNP_MOMENTS_2",
-    "WNP_MOMENTS_SYNC",
-    "YOUTUBE_ENHANCE_3",
-    "YOUTUBE_ENHANCE_3_72",
-]
+import pytest
 
 
 def _compare_weights(expected, actual):
@@ -51,11 +21,7 @@ def _compare_weights(expected, actual):
     assert sorted_e_weights == sorted_a_weights
 
 
-@pytest.fixture
-def WEIGHT_VECTOR():
-    return dict(zip(CFR_IDS, [random.randint(0, 16000) for i in range(len(CFR_IDS))]))
-
-
+@pytest.mark.slow
 def test_write_weights(WEIGHT_VECTOR):
     cfr_remote = CFRRemoteSettings()
     assert cfr_remote.write_models(WEIGHT_VECTOR)
@@ -63,6 +29,7 @@ def test_write_weights(WEIGHT_VECTOR):
     _compare_weights(WEIGHT_VECTOR, actual)
 
 
+@pytest.mark.slow
 def test_update_weights(WEIGHT_VECTOR):
     cfr_remote = CFRRemoteSettings()
 
@@ -77,6 +44,7 @@ def test_update_weights(WEIGHT_VECTOR):
         _compare_weights(WEIGHT_VECTOR, actual)
 
 
+@pytest.mark.slow
 def test_clone_into_cfr_control(MOCK_CFR_DATA):
     cfr_remote = CFRRemoteSettings()
     cfr_remote.clone_to_cfr_control(MOCK_CFR_DATA)
@@ -91,6 +59,7 @@ def test_clone_into_cfr_control(MOCK_CFR_DATA):
         assert a["content"] == m["content"]
 
 
+@pytest.mark.slow
 def test_clone_into_cfr_experiment(MOCK_CFR_DATA):
     cfr_remote = CFRRemoteSettings()
     cfr_remote.clone_to_cfr_experiment(MOCK_CFR_DATA)

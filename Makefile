@@ -5,10 +5,14 @@ all: build
 pytest:
 	python setup.py develop
 	python setup.py test
-	flake8 moz_cfretl tests
+	flake8 cfretl tests
 
 build:
-	docker build -t cfr-personalization:latest .
+	docker build -t cfr-numbermuncher:latest .
 
-up:
-	docker -e KINTO_USER=${KINTO_USER} -e KINTO_PASS=${KINTO_PASS} run cfr-personalization:latest
+run:
+	# Create the bot user (not required in prod)
+	docker run -it cfr-numbermuncher:latest bin/install_bot.sh
+
+	# Spin up the docker instance to write out model weights
+	docker run -it cfr-numbermuncher:latest python -m cfretl.main

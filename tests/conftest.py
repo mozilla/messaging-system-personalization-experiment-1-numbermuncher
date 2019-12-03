@@ -8,12 +8,64 @@ import json
 import pytest
 import pytz
 
-from cfretl.pingsource import BQPingLoader
+from cfretl.asloader import ASLoader
 
 import os
+import random
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--runslow", action="store_true", default=False, help="run slow tests"
+    )
+
+
+def pytest_configure(config):
+    config.addinivalue_line("markers", "slow: mark test as slow to run")
+
+
+def pytest_collection_modifyitems(config, items):
+    if config.getoption("--runslow"):
+        # --runslow given in cli: do not skip slow tests
+        return
+    skip_slow = pytest.mark.skip(reason="need --runslow option to run")
+    for item in items:
+        if "slow" in item.keywords:
+            item.add_marker(skip_slow)
+
+
+# Set a fixed random seed so that tests are stable
+random.seed(42)
 
 parent = os.path.split(__file__)
 FIXTURE_PATH = os.path.join(os.path.split(__file__)[0], "fixtures")
+
+CFR_IDS = [
+    "BOOKMARK_SYNC_CFR",
+    "CRYPTOMINERS_PROTECTION",
+    "CRYPTOMINERS_PROTECTION_71",
+    "FACEBOOK_CONTAINER_3",
+    "FACEBOOK_CONTAINER_3_72",
+    "FINGERPRINTERS_PROTECTION",
+    "FINGERPRINTERS_PROTECTION_71",
+    "GOOGLE_TRANSLATE_3",
+    "GOOGLE_TRANSLATE_3_72",
+    "MILESTONE_MESSAGE",
+    "PDF_URL_FFX_SEND",
+    "PIN_TAB",
+    "PIN_TAB_72",
+    "SAVE_LOGIN",
+    "SAVE_LOGIN_72",
+    "SEND_RECIPE_TAB_CFR",
+    "SEND_TAB_CFR",
+    "SOCIAL_TRACKING_PROTECTION",
+    "SOCIAL_TRACKING_PROTECTION_71",
+    "WNP_MOMENTS_1",
+    "WNP_MOMENTS_2",
+    "WNP_MOMENTS_SYNC",
+    "YOUTUBE_ENHANCE_3",
+    "YOUTUBE_ENHANCE_3_72",
+]
 
 
 @pytest.fixture
@@ -43,20 +95,23 @@ def FIXTURE_JSON():
 
 
 @pytest.fixture
-def bqpl(FIXTURE_JSON):
-    bqpl = BQPingLoader()
+def asloader(FIXTURE_JSON, WEIGHT_VECTOR):
+    asl = ASLoader()
 
     # Clobber the inbound pings
-    bqpl.get_pings = MagicMock(return_value=[FIXTURE_JSON])
+    asl._get_pings = MagicMock(return_value=[FIXTURE_JSON])
 
     # Clobber the model generation
-    bqpl.compute_vector_weights = MagicMock(
-        return_value={"weights": [2, 5, 9, 23, 5, 8, 12]}
-    )
+    asl.compute_vector_weights = MagicMock(return_value=WEIGHT_VECTOR)
 
-    return bqpl
+    return asl
 
 
 @pytest.fixture
 def MOCK_CFR_DATA():
-    return json.load(open(os.path.join(FIXTURE_PATH, "cfr.json")))['data']
+    return json.load(open(os.path.join(FIXTURE_PATH, "cfr.json")))["data"]
+
+
+@pytest.fixture
+def WEIGHT_VECTOR():
+    return dict(zip(CFR_IDS, [random.randint(0, 16000) for i in range(len(CFR_IDS))]))
