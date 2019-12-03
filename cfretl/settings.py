@@ -10,5 +10,5 @@ from decouple import config
 KINTO_BUCKET = "main"
 
 KINTO_URI = config("KINTO_URI", "https://kinto.dev.mozaws.net/v1")
-KINTO_USER = config("KINTO_USER", "cfr-bot")
-KINTO_PASS = config("KINTO_PASS", "botpass")
+KINTO_USER = config("KINTO_USER", "devuser")
+KINTO_PASS = config("KINTO_PASS", "devpass")

@@ -40,21 +40,21 @@ class ASLoader:
         start_ts = start_dt.strftime(BQ_DATE_FORMAT)
         end_ts = end_dt.strftime(BQ_DATE_FORMAT)
 
+        # production query will be different
         query_tmpl = (
-            "select * from `moz-fx-data-bq-srg`.tiles.assa_router_events_daily "
-            "where receive_at >= '{start_ts:s}' and "
-            "receive_at <= '{end_ts:s}' {limit_clause:s}"
+            "select * from `moz-fx-data-shar-nonprod-efed`.messaging_system_live.cfr_v1 "
+            "where submission_timestamp > '{start_ts:s}' and submission_timestamp <= '{end_ts:s}' "
+            "limit 10"
         )
 
-        if limit_rowcount is None:
-            limit = LIMIT_CLAUSE
-        else:
-            limit = "limit {:d} ".format(limit_rowcount)
-
-        query = query_tmpl.format(start_ts=start_ts, end_ts=end_ts, limit_clause=limit)
+        query = query_tmpl.format(start_ts=start_ts, end_ts=end_ts)
         return query.strip()
 
     def _get_pings(self, dt=None, limit_rowcount=None, as_dict=False):
+        if dt is None:
+            logging.warn("No date was specified - defaulting to 7 days ago for an hour")
+            dt = datetime.datetime.now() - timedelta(days=7)
+
         query = self._build_query(dt, limit_rowcount=limit_rowcount)
         query_job = self._client.query(
             query,
@@ -70,9 +70,6 @@ class ASLoader:
                 yield i
 
     def compute_vector_weights(self):
-        for row in self._get_pings():
-            # Run the pings through the model here
-            pass
-
-        # TODO: do soemthing here to build a model
-        raise NotImplementedError()
+        assert len([row for row in self._get_pings()]) > 0
+        # TODO: Call out to dataproc to compute the model here
+        # raise NotImplementedError()

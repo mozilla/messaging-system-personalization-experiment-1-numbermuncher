@@ -53,16 +53,16 @@ def cfr_data():
 
 
 async def compute_models():
-    _ = asyncio.get_running_loop()
+    # _ = asyncio.get_running_loop()
 
-    _ = ASLoader()
+    asloader = ASLoader()
     cfr_rs = CFRRemoteSettings()
 
     # This sets up the test enviroment
     bootstrap_test(cfr_rs)
 
     while True:
-        # _ = asloader.compute_vector_weights()
+        _ = asloader.compute_vector_weights()  # noqa
         write_status = cfr_rs.write_models(get_mock_vector())
         print("Write status: {}".format(write_status))
         # Wait to run the next batch
