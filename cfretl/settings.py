@@ -5,8 +5,6 @@
 from decouple import config
 
 
-# Default CFR Vector width is 7
-
 KINTO_BUCKET = "main"
 
 KINTO_URI = config("KINTO_URI", "https://kinto.dev.mozaws.net/v1")

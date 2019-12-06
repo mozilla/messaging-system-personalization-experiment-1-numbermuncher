@@ -1,0 +1,16 @@
+workerConfig:
+  minInstances: 2  # this is a GCP minimum
+  maxInstances: 2 # this is a GCP minimum
+  weight: 1
+secondaryWorkerConfig:
+  minInstances: 0   # zero pre-emptible nodes are allowed
+  maxInstances: 20
+  weight: 10
+basicAlgorithm:
+  cooldownPeriod: 4m
+  yarnConfig:
+    scaleUpFactor: 0.05
+    scaleDownFactor: 1.0
+    scaleUpMinWorkerFraction: 0.0
+    scaleDownMinWorkerFraction: 0.0
+    gracefulDecommissionTimeout: 1h

@@ -1,73 +1,46 @@
-import asyncio
-from cfretl.asloader import ASLoader
+"""
+This script will create a cluster if required, and start the dataproc
+job to write out to a table.
+"""
+
+import json
+import pkg_resources
+
+import click
 from cfretl.remote_settings import CFRRemoteSettings
-import random
-import requests
-
-DELAY = 1
+from cfretl.dataproc import DataprocFacade
 
 
-def get_mock_vector():
-    CFR_IDS = [
-        "BOOKMARK_SYNC_CFR",
-        "CRYPTOMINERS_PROTECTION",
-        "CRYPTOMINERS_PROTECTION_71",
-        "FACEBOOK_CONTAINER_3",
-        "FACEBOOK_CONTAINER_3_72",
-        "FINGERPRINTERS_PROTECTION",
-        "FINGERPRINTERS_PROTECTION_71",
-        "GOOGLE_TRANSLATE_3",
-        "GOOGLE_TRANSLATE_3_72",
-        "MILESTONE_MESSAGE",
-        "PDF_URL_FFX_SEND",
-        "PIN_TAB",
-        "PIN_TAB_72",
-        "SAVE_LOGIN",
-        "SAVE_LOGIN_72",
-        "SEND_RECIPE_TAB_CFR",
-        "SEND_TAB_CFR",
-        "SOCIAL_TRACKING_PROTECTION",
-        "SOCIAL_TRACKING_PROTECTION_71",
-        "WNP_MOMENTS_1",
-        "WNP_MOMENTS_2",
-        "WNP_MOMENTS_SYNC",
-        "YOUTUBE_ENHANCE_3",
-        "YOUTUBE_ENHANCE_3_72",
-    ]
-    return dict(zip(CFR_IDS, [random.randint(0, 16000) for i in range(len(CFR_IDS))]))
+def load_mock_model():
+    fname = pkg_resources.resource_filename("cfretl", "scripts/cfr_ml_model.json")
+    mock_model = json.load(open(fname))["data"][0]
+    return mock_model
 
 
-def bootstrap_test(cfr_rs):
-    print("Installed CFR Control: {}".format(cfr_rs.clone_to_cfr_control(cfr_data())))
-    print(
-        "Installed CFR Experimetns: {}".format(
-            cfr_rs.clone_to_cfr_experiment(cfr_data())
-        )
-    )
+@click.command()
+@click.option("--project-id", default="cfr-personalization-experiment")
+@click.option("--cluster-name", default="cfr-experiments")
+@click.option("--zone", default="us-west1-a")
+@click.option("--bucket-name", default="cfr-ml-jobs")
+@click.option("--spark-filename", default="compute_weights.py")
+def main(
+    project_id=None, cluster_name=None, zone=None, bucket_name=None, spark_filename=None
+):
+    dataproc = DataprocFacade(project_id, cluster_name, zone)
+    dataproc.create_cluster_if_not_exists()
 
+    # Upload the script from teh cfretl.scripts directory
+    dataproc.upload_sparkjob(bucket_name, spark_filename)
+    dataproc.run_job(bucket_name, spark_filename)
 
-def cfr_data():
-    return requests.get(
-        "https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/cfr/records"
-    ).json()["data"]
+    # TODO: do something to transform the bq result table
+    # into a final model
 
+    remote_settings = CFRRemoteSettings()
+    remote_settings.write_models(load_mock_model())
 
-async def compute_models():
-    # _ = asyncio.get_running_loop()
-
-    asloader = ASLoader()
-    cfr_rs = CFRRemoteSettings()
-
-    # This sets up the test enviroment
-    bootstrap_test(cfr_rs)
-
-    while True:
-        _ = asloader.compute_vector_weights()  # noqa
-        write_status = cfr_rs.write_models(get_mock_vector())
-        print("Write status: {}".format(write_status))
-        # Wait to run the next batch
-        await asyncio.sleep(DELAY)
+    dataproc.destroy_cluster()
 
 
 if __name__ == "__main__":
-    asyncio.run(compute_models())
+    main()

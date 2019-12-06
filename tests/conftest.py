@@ -2,13 +2,11 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from unittest.mock import MagicMock
 import datetime
 import json
 import pytest
 import pytz
 
-from cfretl.asloader import ASLoader
 
 import os
 import random
@@ -93,25 +91,52 @@ def FIXTURE_JSON():
         "value": '{"card_type": "pinned", "icon_type": "screenshot_with_icon"}',
     }
 
-
-@pytest.fixture
-def asloader(FIXTURE_JSON, WEIGHT_VECTOR):
-    asl = ASLoader()
-
-    # Clobber the inbound pings
-    asl._get_pings = MagicMock(return_value=[FIXTURE_JSON])
-
-    # Clobber the model generation
-    asl.compute_vector_weights = MagicMock(return_value=WEIGHT_VECTOR)
-
-    return asl
-
-
-@pytest.fixture
-def MOCK_CFR_DATA():
-    return json.load(open(os.path.join(FIXTURE_PATH, "cfr.json")))["data"]
-
-
 @pytest.fixture
 def WEIGHT_VECTOR():
-    return dict(zip(CFR_IDS, [random.randint(0, 16000) for i in range(len(CFR_IDS))]))
+    return {
+        "CFR_ID_1": {
+            "feature_1": {"p_given_cfr_acceptance": 0.7, "p_given_cfr_rejection": 0.5}
+        },
+        "CFR_ID_2": {
+            "feature_1": {
+                "p_given_cfr_acceptance": 0.49,
+                "p_given_cfr_rejection": 0.25,
+            },
+            "feature_2": {
+                "p_given_cfr_acceptance": 0.49,
+                "p_given_cfr_rejection": 0.25,
+            },
+        },
+        "CFR_ID_3": {
+            "feature_1": {
+                "p_given_cfr_acceptance": 0.343,
+                "p_given_cfr_rejection": 0.125,
+            },
+            "feature_2": {
+                "p_given_cfr_acceptance": 0.343,
+                "p_given_cfr_rejection": 0.125,
+            },
+            "feature_3": {
+                "p_given_cfr_acceptance": 0.343,
+                "p_given_cfr_rejection": 0.125,
+            },
+        },
+        "CFR_ID_4": {
+            "feature_1": {
+                "p_given_cfr_acceptance": 0.2401,
+                "p_given_cfr_rejection": 0.0625,
+            },
+            "feature_2": {
+                "p_given_cfr_acceptance": 0.2401,
+                "p_given_cfr_rejection": 0.0625,
+            },
+            "feature_3": {
+                "p_given_cfr_acceptance": 0.2401,
+                "p_given_cfr_rejection": 0.0625,
+            },
+            "feature_4": {
+                "p_given_cfr_acceptance": 0.2401,
+                "p_given_cfr_rejection": 0.0625,
+            },
+        },
+    }

@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="mozilla-cfr-personalization",
+    name="CFR Personalization",
     use_scm_version=False,
     version="0.1.0",
     setup_requires=["setuptools_scm", "pytest-runner"],
@@ -14,6 +14,7 @@ setup(
     url="https://github.com/mozilla/cfr-personalization",
     license="MPL 2.0",
     install_requires=[],
+    data_files=[("scripts", ["scripts/compute_weights.py"])],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment :: Mozilla",
