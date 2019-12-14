@@ -14,7 +14,7 @@ setup(
     url="https://github.com/mozilla/cfr-personalization",
     license="MPL 2.0",
     install_requires=[],
-    data_files=[("scripts", ["scripts/compute_weights.py"])],
+    data_files=[("scripts", ["cfretl/scripts/compute_weights.py"])],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment :: Mozilla",
