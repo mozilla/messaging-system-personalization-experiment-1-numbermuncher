@@ -20,21 +20,18 @@ gcloud_tagupload:
 	docker tag cfr-numbermuncher:latest gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
 	docker push gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
 
-
 import_policy:
 	gcloud dataproc autoscaling-policies import cfr-personalization-autoscale --region=$(GCLOUD_REGION) --source=./dataproc/autoscale_policy.yaml --verbosity info
 
-upload:
-	gsutil cp scripts/compute_weights.py gs://cfr-ml-jobs/compute_weights.py
-
 run:
-	# Create the bot user (not required in prod)
-	docker run -it cfr-numbermuncher:latest bin/install_bot.sh
-
 	# Spin up the docker instance to write out model weights
 	docker run -v ~/.config:/app/.config \
-		-e GOOGLE_CLOUD_PROJECT=moz-fx-data-derived-datasets \
-		-it cfr-numbermuncher:latest python -m cfretl.main
+		-it cfr-numbermuncher:latest
+
+run_gcr:
+	# Spin up the docker instance to write out model weights
+	docker run -v ~/.config:/app/.config \
+		-it gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
 
 
 cluster:
