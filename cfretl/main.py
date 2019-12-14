@@ -3,6 +3,8 @@ This script will create a cluster if required, and start the dataproc
 job to write out to a table.
 """
 
+import datetime
+import random
 import json
 import pkg_resources
 
@@ -13,8 +15,18 @@ from cfretl.dataproc import DataprocFacade
 
 def load_mock_model():
     fname = pkg_resources.resource_filename("cfretl", "scripts/cfr_ml_model.json")
-    mock_model = json.load(open(fname))["data"][0]
-    return mock_model
+    cfr_model = json.load(open(fname))["data"][0]
+
+    # Mutate the data so we get a 'fresh' model for each update
+    cfr_model["version"] = int(datetime.datetime.utcnow().strftime("%Y%m%d%H%M%S"))
+    for model in cfr_model["models_by_cfr_id"].values():
+        for k, v in model.items():
+            if k == "prior_cfr":
+                continue
+            v["p_given_cfr_acceptance"] = random.random()
+            v["p_given_cfr_rejection"] = random.random()
+
+    return cfr_model
 
 
 @click.command()
@@ -31,15 +43,20 @@ def main(
 
     # Upload the script from teh cfretl.scripts directory
     dataproc.upload_sparkjob(bucket_name, spark_filename)
+
+    # TODO: should probably pass a token in here so that we
+    # can verify that results were successfully computed
     dataproc.run_job(bucket_name, spark_filename)
 
-    # TODO: do something to transform the bq result table
-    # into a final model
-
     remote_settings = CFRRemoteSettings()
-    remote_settings.write_models(load_mock_model())
 
-    dataproc.destroy_cluster()
+    # TODO: do something to test that we have results we're looking for
+    # and transform the bq result table
+    # into a final model
+    model = load_mock_model()
+    remote_settings.write_models(model)
+
+    dataproc.delete_cluster_if_exists()
 
 
 if __name__ == "__main__":
