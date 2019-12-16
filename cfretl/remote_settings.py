@@ -20,7 +20,7 @@ CFR_EXPERIMENT = "cfr-ml-experiments"
 CFR_CONTROL = "cfr-ml-control"
 
 FEATURES_LIST = [
-    "have_firefox_as_default_browser",
+    "has_firefox_as_default_browser",
     "active_ticks",
     "total_uri_count",
     "about_preferences_non_default_value_count",
