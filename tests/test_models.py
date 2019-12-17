@@ -1,5 +1,7 @@
-from cfretl.models import one_cfr_model
-from cfretl.models import generate_cfr_model
+import random
+from cfretl.models import CFRModel
+
+random.seed(42)
 
 
 EXPECTED = {
@@ -56,27 +58,61 @@ EXPECTED = {
 
 
 def test_one_cfr_model():
-    snip = one_cfr_model("CFR_ID", "feature_x", 0.1, 0.2)
-    assert snip == {
+    model = CFRModel()
+    snip = model.one_cfr("CFR_ID", [0.45, 0.55], [[1, 2, 3], [4, 5, 6]])
+
+    expected = {
         "CFR_ID": {
-            "feature_x": {"p_given_cfr_acceptance": 0.1, "p_given_cfr_rejection": 0.2}
+            "priors": [0.45, 0.55],
+            "negProbs": [[1, 2, 3], [4, 5, 6]],
+            "delProbs": [[1, 4], [2, 5], [3, 6]],
         }
     }
+    assert snip == expected
 
 
 def test_generate_model():
 
+    model = CFRModel()
+
     data = []
-    for i in range(1, 5):
-        for f_i in range(1, 1 + i):
-            rdict = {
-                "id": "CFR_ID_%d" % i,
-                "feature_id": "feature_%d" % f_i,
-                "p0": 0.7 ** i,
-                "p1": 0.5 ** i,
-            }
-            data.append(rdict)
+    for cfr_idx in range(1, 5):
+        p = random.random()
+        snip = model.one_cfr(
+            "CFR_ID_{}".format(cfr_idx),
+            [p, 1 - p],
+            [
+                [1 * cfr_idx, 2 * cfr_idx, 3 * cfr_idx],
+                [4 * cfr_idx, 5 * cfr_idx, 6 * cfr_idx],
+            ],
+        )
+        data.append(snip)
 
-    model = generate_cfr_model(data, 0.45, 0.55, 123)
+    json_out = model.generate_cfr_model(data, 123)
+    expected = {
+        "version": 123,
+        "models_by_cfr_id": {
+            "CFR_ID_1": {
+                "priors": [0.6394267984578837, 0.36057320154211625],
+                "negProbs": [[1, 2, 3], [4, 5, 6]],
+                "delProbs": [[1, 4], [2, 5], [3, 6]],
+            },
+            "CFR_ID_2": {
+                "priors": [0.025010755222666936, 0.9749892447773331],
+                "negProbs": [[2, 4, 6], [8, 10, 12]],
+                "delProbs": [[2, 8], [4, 10], [6, 12]],
+            },
+            "CFR_ID_3": {
+                "priors": [0.27502931836911926, 0.7249706816308807],
+                "negProbs": [[3, 6, 9], [12, 15, 18]],
+                "delProbs": [[3, 12], [6, 15], [9, 18]],
+            },
+            "CFR_ID_4": {
+                "priors": [0.22321073814882275, 0.7767892618511772],
+                "negProbs": [[4, 8, 12], [16, 20, 24]],
+                "delProbs": [[4, 16], [8, 20], [12, 24]],
+            },
+        },
+    }
 
-    assert EXPECTED == model
+    assert json_out == expected
