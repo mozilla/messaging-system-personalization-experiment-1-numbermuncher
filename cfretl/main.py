@@ -38,27 +38,27 @@ def load_mock_model():
 def main(
     project_id=None, cluster_name=None, zone=None, bucket_name=None, spark_filename=None
 ):
-    dataproc = DataprocFacade(project_id, cluster_name, zone)
-    dataproc.install_node_config()
 
-    dataproc.create_cluster_if_not_exists()
+    # The DataprocFacade will manage cluster creation
+    # and destruction once the context exits
+    with DataprocFacade(project_id, cluster_name, zone) as dataproc:
+        # Upload the script from the cfretl.scripts directory
 
-    # Upload the script from teh cfretl.scripts directory
-    dataproc.upload_sparkjob(bucket_name, spark_filename)
+        # TODO: this should just pass in a filename - a cluster
+        # is only going to run a single job anyway
+        dataproc.upload_sparkjob(bucket_name, spark_filename)
 
-    # TODO: should probably pass a token in here so that we
-    # can verify that results were successfully computed
-    dataproc.run_job(bucket_name, spark_filename)
+        # TODO: should probably pass a token in here so that we
+        # can verify that results were successfully computed
+        dataproc.run_job(bucket_name, spark_filename)
 
-    remote_settings = CFRRemoteSettings()
+        remote_settings = CFRRemoteSettings()
 
-    # TODO: do something to test that we have results we're looking for
-    # and transform the bq result table
-    # into a final model
-    model = load_mock_model()
-    remote_settings.write_models(model)
-
-    dataproc.delete_cluster_if_exists()
+        # TODO: do something to test that we have results we're looking for
+        # and transform the bq result table
+        # into a final model
+        model = load_mock_model()
+        remote_settings.write_models(model)
 
 
 if __name__ == "__main__":

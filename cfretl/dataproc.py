@@ -57,6 +57,14 @@ class DataprocFacade:
         self._dataproc_cluster_client = None
         self._dataproc_job_client = None
 
+    def __enter__(self):
+        self.install_node_config()
+        self.create_cluster_if_not_exists()
+
+    def __exit__(self):
+        self.delete_cluster_if_exists()
+
+
     def install_node_config(self, bucket_name='cfr-ml-jobs'):
         """
         """
