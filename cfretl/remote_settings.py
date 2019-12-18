@@ -11,7 +11,6 @@ from cfretl import settings
 
 import json
 
-# import jsonschema
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -20,21 +19,21 @@ CFR_EXPERIMENT = "cfr-ml-experiments"
 CFR_CONTROL = "cfr-ml-control"
 
 FEATURES_LIST = [
-    "has_firefox_as_default_browser",
-    "active_ticks",
-    "total_uri_count",
     "about_preferences_non_default_value_count",
-    "has_at_least_one_self_installed_addon",
+    "active_ticks",
+    "dark_mode_active",
+    "firefox_accounts_configured",
+    "has_at_least_one_login_saved_in_the_browser",
     "has_at_least_one_self_installed_adblocker",
+    "has_at_least_one_self_installed_addon",
     "has_at_least_one_self_installed_password_manager",
     "has_at_least_one_self_installed_theme",
-    "dark_mode_active",
-    "total_bookmarks_count",
-    "has_at_least_one_login_saved_in_the_browser",
-    "firefox_accounts_configured",
+    "has_firefox_as_default_browser",
     "locale",
-    "profile_age",
     "main_monitor_screen_width",
+    "profile_age",
+    "total_bookmarks_count",
+    "total_uri_count",
 ]
 
 
