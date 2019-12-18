@@ -39,6 +39,8 @@ def main(
     project_id=None, cluster_name=None, zone=None, bucket_name=None, spark_filename=None
 ):
     dataproc = DataprocFacade(project_id, cluster_name, zone)
+    dataproc.install_node_config()
+
     dataproc.create_cluster_if_not_exists()
 
     # Upload the script from teh cfretl.scripts directory
