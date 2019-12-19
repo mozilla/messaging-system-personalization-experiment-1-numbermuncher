@@ -14,10 +14,6 @@ import json
 import requests
 from requests.auth import HTTPBasicAuth
 
-CFR_MODELS = "cfr-ml-model"
-CFR_EXPERIMENT = "cfr-ml-experiments"
-CFR_CONTROL = "cfr-ml-control"
-
 FEATURES_LIST = [
     "about_preferences_non_default_value_count",
     "active_ticks",
@@ -87,13 +83,13 @@ class CFRRemoteSettings:
         return resp.status_code >= 200 and resp.status_code < 300
 
     def check_experiment_exists(self):
-        return self._check_collection_exists(CFR_EXPERIMENT)
+        return self._check_collection_exists(settings.CFR_EXPERIMENTS)
 
     def check_control_exists(self):
-        return self._check_collection_exists(CFR_CONTROL)
+        return self._check_collection_exists(settings.CFR_CONTROL)
 
     def check_model_exists(self):
-        return self._check_collection_exists(CFR_MODELS)
+        return self._check_collection_exists(settings.CFR_MODEL)
 
     def _create_collection(self, id):
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
@@ -104,18 +100,18 @@ class CFRRemoteSettings:
         return status_code >= 200 and status_code < 300
 
     def create_experiment_collection(self):
-        return self._create_collection(CFR_EXPERIMENT)
+        return self._create_collection(settings.CFR_EXPERIMENTS)
 
     def create_control_collection(self):
-        return self._create_collection(CFR_CONTROL)
+        return self._create_collection(settings.CFR_CONTROL)
 
     def create_model_collection(self):
-        return self._create_collection(CFR_MODELS)
+        return self._create_collection(settings.CFR_MODEL)
 
     def _test_read_cfr_control(self):
         try:
             url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
-                base_uri=self._kinto_uri, c_id=CFR_CONTROL
+                base_uri=self._kinto_uri, c_id=settings.CFR_CONTROL
             )
             resp = requests.get(url)
             jdata = resp.json()["data"]
@@ -128,7 +124,7 @@ class CFRRemoteSettings:
     def _test_read_cfr_experimental(self):
         try:
             url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
-                base_uri=self._kinto_uri, c_id=CFR_EXPERIMENT
+                base_uri=self._kinto_uri, c_id=settings.CFR_EXPERIMENTS
             )
             resp = requests.get(url)
             jdata = resp.json()["data"]
@@ -162,7 +158,7 @@ class CFRRemoteSettings:
         """
         try:
             url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{c_id:s}".format(
-                base_uri=self._kinto_uri, c_id=CFR_MODELS
+                base_uri=self._kinto_uri, c_id=settings.CFR_MODEL
             )
             resp = requests.get(url)
             jdata = resp.json()["data"]
@@ -175,21 +171,22 @@ class CFRRemoteSettings:
         return jdata
 
     def write_models(self, json_data):
-        # TODO: we need a new schema validator
-        # jsonschema.validate(json_data, self.schema)
         if not self.check_model_exists():
             if not self.create_model_collection():
-                raise SecurityError("cfr-model collection could not be created.")
+                raise SecurityError("cfr-ml-model collection could not be created.")
 
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
         url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{c_id:s}".format(
-            base_uri=self._kinto_uri, c_id=CFR_MODELS
+            base_uri=self._kinto_uri, c_id=settings.CFR_MODEL
         )
-
         jdata = {"data": json_data}
         resp = requests.put(url, json=jdata, auth=auth)
+        status_ok = resp.status_code >= 200 and resp.status_code < 300
 
-        return resp.status_code >= 200 and resp.status_code < 300
+        print("Wrote data to {:s}: {:b}".format(url, status_ok))
+        if not status_ok:
+            print("Response: {:s}".format(str(resp)))
+        return status_ok
 
     def cfr_records(self):
         url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
@@ -226,10 +223,10 @@ class CFRRemoteSettings:
         if not self.check_control_exists():
             if not self.create_control_collection():
                 raise SecurityError(
-                    "{} collection could not be created.".format(CFR_CONTROL)
+                    "{} collection could not be created.".format(settings.CFR_CONTROL)
                 )
 
-        return self._clone_cfr_to(cfr_data, CFR_CONTROL)
+        return self._clone_cfr_to(cfr_data, settings.CFR_CONTROL)
 
     def clone_to_cfr_experiment(self, cfr_data):
         """
@@ -239,7 +236,9 @@ class CFRRemoteSettings:
         if not self.check_experiment_exists():
             if not self.create_experiment_collection():
                 raise SecurityError(
-                    "{} collection could not be created.".format(CFR_EXPERIMENT)
+                    "{} collection could not be created.".format(
+                        settings.CFR_EXPERIMENTS
+                    )
                 )
 
         # Test CFR Message added from test plan
@@ -304,4 +303,4 @@ class CFRRemoteSettings:
                 old_targeting=record["targeting"], id=record["id"]
             )
         cfr_data.append(test_cfr)
-        return self._clone_cfr_to(cfr_data, CFR_EXPERIMENT)
+        return self._clone_cfr_to(cfr_data, settings.CFR_EXPERIMENTS)

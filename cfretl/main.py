@@ -4,13 +4,14 @@ job to write out to a table.
 """
 
 import datetime
-import random
 import json
 import pkg_resources
 
 import click
 from cfretl.remote_settings import CFRRemoteSettings
 from cfretl.dataproc import DataprocFacade
+
+from cfretl import settings
 
 
 def load_mock_model():
@@ -19,40 +20,31 @@ def load_mock_model():
 
     # Mutate the data so we get a 'fresh' model for each update
     cfr_model["version"] = int(datetime.datetime.utcnow().strftime("%Y%m%d%H%M%S"))
-    for model in cfr_model["models_by_cfr_id"].values():
-        for k, v in model.items():
-            if k == "prior_cfr":
-                continue
-            v["p_given_cfr_acceptance"] = random.random()
-            v["p_given_cfr_rejection"] = random.random()
+    del cfr_model["id"]
+    del cfr_model["last_modified"]
 
     return cfr_model
 
 
 @click.command()
-@click.option("--project-id", default="cfr-personalization-experiment")
-@click.option("--cluster-name", default="cfr-experiments")
-@click.option("--zone", default="us-west1-a")
-@click.option("--bucket-name", default="cfr-ml-jobs")
-@click.option("--spark-filename", default="compute_weights.py")
-def main(
-    project_id=None, cluster_name=None, zone=None, bucket_name=None, spark_filename=None
-):
-
+def main(cluster_name=None, zone=None, bucket_name=None, spark_filename=None):
     # The DataprocFacade will manage cluster creation
     # and destruction once the context exits
-    with DataprocFacade(project_id, cluster_name, zone) as dataproc:
+    with DataprocFacade(
+        settings.GCP_PROJECT_ID, settings.DATAPROC_CLUSTER, settings.GCP_ZONE
+    ) as dataproc:
         # Upload the script from the cfretl.scripts directory
 
         # TODO: this should just pass in a filename - a cluster
         # is only going to run a single job anyway
-        dataproc.upload_sparkjob(bucket_name, spark_filename)
+        dataproc.upload_sparkjob(settings.GCS_BUCKET_NAME, settings.DATAPROC_SCRIPT)
 
         # TODO: should probably pass a token in here so that we
         # can verify that results were successfully computed
-        dataproc.run_job(bucket_name, spark_filename)
+        dataproc.run_job(settings.GCS_BUCKET_NAME, settings.DATAPROC_SCRIPT)
 
         remote_settings = CFRRemoteSettings()
+        remote_settings.create_user()
 
         # TODO: do something to test that we have results we're looking for
         # and transform the bq result table
