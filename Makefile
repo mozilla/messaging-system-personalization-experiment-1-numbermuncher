@@ -32,12 +32,14 @@ run_gcr:
 	# Spin up the docker instance to write out model weights
 	docker run -v ~/.config:/app/.config \
 		-e GOOGLE_CLOUD_PROJECT=cfr-personalization-experiment \
+		-e TEST_PREFIX=vng1 \
 		-it gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
 
 bash_gcr:
 	# Start up bash in the container
 	docker run -v ~/.config:/app/.config \
 				-e GOOGLE_CLOUD_PROJECT=cfr-personalization-experiment \
+				-e TEST_PREFIX=vng1 \
 				--entrypoint=/bin/bash  \
 				-it gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
 
