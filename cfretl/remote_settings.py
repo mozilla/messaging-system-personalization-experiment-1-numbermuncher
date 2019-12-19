@@ -76,12 +76,19 @@ class CFRRemoteSettings:
             )
         return self._schema
 
-    def create_user(self):
+    def create_user_in_test(self):
         kinto_tmpl = "{host:s}/accounts/{user:s}"
         url = kinto_tmpl.format(host=self._kinto_uri, user=self._kinto_user)
-        resp = requests.put(url, json={'data': {"password": self._kinto_pass}})
-        ok = resp.status_code >= 200 and resp.status_code < 300
-        print("Created user : {:s} {:b}".format(self._kinto_user, ok))
+
+        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
+        status_code = requests.get(url, auth=auth).status_code
+        ok = status_code >= 200 and status_code < 300
+        if not ok:
+            resp = requests.put(url, json={'data': {"password": self._kinto_pass}})
+            ok = resp.status_code >= 200 and resp.status_code < 300
+            print("Created user : {:s} {:b}".format(self._kinto_user, ok))
+        else:
+            print("User {:s} already exists".format(self._kinto_user))
 
     def _check_collection_exists(self, id):
         kinto_tmpl = "{host:s}/buckets/{bucket:s}/collections/{id:s}"

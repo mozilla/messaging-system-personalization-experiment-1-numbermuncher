@@ -44,7 +44,7 @@ def main(cluster_name=None, zone=None, bucket_name=None, spark_filename=None):
         dataproc.run_job(settings.GCS_BUCKET_NAME, settings.DATAPROC_SCRIPT)
 
         remote_settings = CFRRemoteSettings()
-        remote_settings.create_user()
+        remote_settings.create_user_in_test()
 
         # TODO: do something to test that we have results we're looking for
         # and transform the bq result table
