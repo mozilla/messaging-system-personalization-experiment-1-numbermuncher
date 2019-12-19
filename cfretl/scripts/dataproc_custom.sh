@@ -21,7 +21,7 @@ function install_pip() {
 
 function main() {
     install_pip
-    pip install --upgrade scikit-learn=0.22 google-cloud-bigquery==1.21.0 pandas==0.25.3 numpy==1.17.3
+    pip install --upgrade scikit-learn==0.22 google-cloud-bigquery==1.21.0 pandas==0.25.3 numpy==1.17.3
 }
 
 main
