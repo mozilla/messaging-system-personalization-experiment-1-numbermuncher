@@ -31,6 +31,7 @@ run:
 run_gcr:
 	# Spin up the docker instance to write out model weights
 	docker run -v ~/.config:/app/.config \
+		-e GOOGLE_CLOUD_PROJECT=cfr-personalization-experiment \
 		-it gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
 
 
