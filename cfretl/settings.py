@@ -14,7 +14,7 @@ KINTO_URI = config("KINTO_URI", "https://kinto.dev.mozaws.net/v1")
 KINTO_USER = config("KINTO_USER", TEST_PREFIX + "devuser")
 KINTO_PASS = config("KINTO_PASS", TEST_PREFIX + "devpass")
 
-KINTO_BUCKET = "main"
+KINTO_BUCKET = config("KINTO_BUCKET", "main")
 
 # This specifies the GCP project we are running in
 GCP_PROJECT_ID = config("GCP_PROJECT_ID", "cfr-personalization-experiment")
