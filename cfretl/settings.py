@@ -8,6 +8,7 @@ from decouple import config
 # to prevent midair collisions testing with devuser/devpass
 TEST_PREFIX = config("TEST_PREFIX", "")
 
+SENTRY_DSN = config("SENTRY_DSN", '')
 
 KINTO_URI = config("KINTO_URI", "https://kinto.dev.mozaws.net/v1")
 KINTO_USER = config("KINTO_USER", TEST_PREFIX + "devuser")

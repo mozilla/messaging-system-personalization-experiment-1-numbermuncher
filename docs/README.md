@@ -9,15 +9,10 @@
 
 ## How does it work?
 
-CFR instrumentation works by reading telemetry pings directly from
-'live' tables.
+CFR Personalization is done inside of a Dataproc cluster in GCP.
 
-Those pings go through a ML pass to generate a new set of weights and
-we write directly into Remote Settings.
-
-TODO: write more about ML layer here
-
-Some terminology is important:
+In Dataproc - a PySpark job is run over BigQuery tables from the
+telemetry feeds.  
 
 In the context of Remote Settings, CFR uses the 'main' bucket.
 
@@ -28,8 +23,6 @@ To minimize impact on production, we constrain the places where
 we can write into the 'main' bucket.
 
 ![Collections are not 'Buckets'](./rs_collections.jpg "Collections are not Buckets")
-
-CFR-Personalization will: \* _only_ operate on collections within the 'main' bucket \* _only_ write to buckets with a prefix 'cfr-exp-' \* all writes to a collection will first be validated
 
 ## Building and running tests
 

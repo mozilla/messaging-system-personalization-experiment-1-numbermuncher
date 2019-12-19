@@ -3,15 +3,25 @@ This script will create a cluster if required, and start the dataproc
 job to write out to a table.
 """
 
+import argparse
 import datetime
 import json
 import pkg_resources
 
-import click
+from flask import Flask
+from dockerflow.flask import Dockerflow
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
 from cfretl.remote_settings import CFRRemoteSettings
 from cfretl.dataproc import DataprocFacade
 
 from cfretl import settings
+
+app = Flask(__name__)
+dockerflow = Dockerflow(app)
+
+sentry_sdk.init(dsn=settings.SENTRY_DSN, integrations=[FlaskIntegration()])
 
 
 def load_mock_model():
@@ -26,8 +36,8 @@ def load_mock_model():
     return cfr_model
 
 
-@click.command()
-def main(cluster_name=None, zone=None, bucket_name=None, spark_filename=None):
+@app.route("/")
+def main():
     # The DataprocFacade will manage cluster creation
     # and destruction once the context exits
     with DataprocFacade(
@@ -54,4 +64,9 @@ def main(cluster_name=None, zone=None, bucket_name=None, spark_filename=None):
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Start the flask service")
+    parser.add_argument('--port', type=int, default=8000, help='Port')
+    parser.add_argument("--host", type=str, default='0.0.0.0', help="Hostname")
+    args = parser.parse_args()
+
+    app.run(host=args.host, port=int(args.port))
