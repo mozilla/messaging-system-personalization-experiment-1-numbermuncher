@@ -4,21 +4,35 @@
 
 from decouple import config
 
+# This is only required in the dev enviroment
+# to prevent midair collisions testing with devuser/devpass
 TEST_PREFIX = config("TEST_PREFIX", "")
 
-KINTO_BUCKET = "main"
 
 KINTO_URI = config("KINTO_URI", "https://kinto.dev.mozaws.net/v1")
 KINTO_USER = config("KINTO_USER", TEST_PREFIX + "devuser")
 KINTO_PASS = config("KINTO_PASS", TEST_PREFIX + "devpass")
 
+KINTO_BUCKET = "main"
+
+# This specifies the GCP project we are running in
 GCP_PROJECT_ID = config("GCP_PROJECT_ID", "cfr-personalization-experiment")
+
+# The dataproc cluster name can be redefined if necessary
 DATAPROC_CLUSTER = config("DATAPROC_CLUSTER", "cfr-experiments")
+
+# The Dataproc cluster must be created within a zone. The region is
+# automatically computed from the zone definition.
 GCP_ZONE = config("GCP_ZONE", "us-west1-a")
 
+# This is the GCS bucket where the Dataproc job will live
 GCS_BUCKET_NAME = config("GCS_BUCKET_NAME", "cfr-ml-jobs")
+
+# The script from cfretl.scripts which will be uploaded into GCS
 DATAPROC_SCRIPT = config("DATAPROC_SCRIPT", "compute_weights.py")
 
+# These are names of the RemoteSettings collections in the main bucket
+# None of these should need to be modified.
 CFR_MODEL = config("CFR_MODEL", TEST_PREFIX + "cfr-ml-model")
 CFR_EXPERIMENTS = config("CFR_EXPERIMENTS", TEST_PREFIX + "cfr-ml-experiments")
 CFR_CONTROL = config("CFR_CONTROL", TEST_PREFIX + "cfr-ml-control")
