@@ -59,6 +59,8 @@ class DataprocFacade:
 
     def __enter__(self):
         self.install_node_config()
+        if self.cluster_exists():
+            raise RuntimeError("Dataproc cluster already exists - terminating job")
         self.create_cluster_if_not_exists()
         return self
 
