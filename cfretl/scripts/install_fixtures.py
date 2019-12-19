@@ -43,7 +43,11 @@ def generate_cfr_cfgdata(version_code):
     return model.generate_cfr_model(data, version_code)
 
 
-remote_settings.create_user()
+remote_settings.create_user_in_test()
+
+remote_settings.clone_to_cfr_control(CFRS)
+remote_settings.clone_to_cfr_experiment(CFRS)
+
 json_model = generate_cfr_cfgdata(version_code)
 remote_settings.write_models(json_model)
 print("Wrote out version : {:d}".format(version_code))
