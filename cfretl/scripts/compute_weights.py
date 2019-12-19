@@ -1,22 +1,22 @@
 #!/usr/bin/python
 
 from pyspark.sql import SparkSession
-from sklearn import metrics
+from sklearn import metrics  # noqa
 
 # Import numerical computation libraries
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB, CategoricalNB
-from sklearn.preprocessing import OrdinalEncoder
+from sklearn.ensemble import RandomForestClassifier  # noqa
+from sklearn.model_selection import train_test_split  # noqa
+from sklearn.naive_bayes import GaussianNB, CategoricalNB  # noqa
+from sklearn.preprocessing import OrdinalEncoder  # noqa
 import numpy as np
 import pandas as pd  # noqa
 
 
 def check_sklearn_dev():
-    '''
+    """
     This just verifies that sklearn 0.23-dev is installed properly
     by checking CategoricalNB results
-    '''
+    """
     rng = np.random.RandomState(1)
     X = rng.randint(5, size=(6, 100))
     y = np.array([1, 2, 3, 4, 5, 6])
@@ -24,6 +24,7 @@ def check_sklearn_dev():
     clf = CategoricalNB()
     clf.fit(X, y)
     assert [3] == clf.predict(X[2:3])
+
 
 def spark_query_bq():
     spark = (

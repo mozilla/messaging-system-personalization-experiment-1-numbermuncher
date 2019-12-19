@@ -3,7 +3,6 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import datetime
-import json
 import pytest
 import pytz
 
@@ -90,6 +89,7 @@ def FIXTURE_JSON():
         "sample_id": 63,
         "value": '{"card_type": "pinned", "icon_type": "screenshot_with_icon"}',
     }
+
 
 @pytest.fixture
 def WEIGHT_VECTOR():
