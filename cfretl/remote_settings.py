@@ -84,7 +84,7 @@ class CFRRemoteSettings:
         status_code = requests.get(url, auth=auth).status_code
         ok = status_code >= 200 and status_code < 300
         if not ok:
-            resp = requests.put(url, json={'data': {"password": self._kinto_pass}})
+            resp = requests.put(url, json={"data": {"password": self._kinto_pass}})
             ok = resp.status_code >= 200 and resp.status_code < 300
             print("Created user : {:s} {:b}".format(self._kinto_user, ok))
         else:
@@ -224,9 +224,13 @@ class CFRRemoteSettings:
             )
             resp = requests.put(url, json={"data": obj}, auth=auth)
             if resp.status_code > 299:
-                raise RemoteSettingWriteError(
-                    "Error cloning CFR record id: {}".format(obj_id)
+                print(
+                    RemoteSettingWriteError(
+                        "Error cloning CFR record id: {}".format(obj_id)
+                    )
                 )
+            else:
+                print("Cloned: {:s}/{:s}".format(c_id, obj_id))
         return True
 
     def clone_to_cfr_control(self, cfr_data):
