@@ -7,6 +7,7 @@ import argparse
 import datetime
 import json
 import pkg_resources
+import time
 
 from flask import Flask
 from dockerflow.flask import Dockerflow
@@ -63,10 +64,16 @@ def main():
         remote_settings.write_models(model)
 
 
-if __name__ == "__main__":
+def start_flask():
     parser = argparse.ArgumentParser(description="Start the flask service")
-    parser.add_argument('--port', type=int, default=8000, help='Port')
-    parser.add_argument("--host", type=str, default='0.0.0.0', help="Hostname")
+    parser.add_argument("--port", type=int, default=8000, help="Port")
+    parser.add_argument("--host", type=str, default="0.0.0.0", help="Hostname")
     args = parser.parse_args()
 
     app.run(host=args.host, port=int(args.port))
+
+
+if __name__ == "__main__":
+    while True:
+        main()
+        time.sleep(60 * 10)
