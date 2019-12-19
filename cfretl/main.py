@@ -7,11 +7,15 @@ import datetime
 import json
 import pkg_resources
 
-import click
+import sentry_sdk
+
 from cfretl.remote_settings import CFRRemoteSettings
 from cfretl.dataproc import DataprocFacade
 
 from cfretl import settings
+
+
+sentry_sdk.init(dsn=settings.SENTRY_DSN)
 
 
 def load_mock_model():
@@ -26,8 +30,7 @@ def load_mock_model():
     return cfr_model
 
 
-@click.command()
-def main(cluster_name=None, zone=None, bucket_name=None, spark_filename=None):
+def main():
     # The DataprocFacade will manage cluster creation
     # and destruction once the context exits
     with DataprocFacade(
