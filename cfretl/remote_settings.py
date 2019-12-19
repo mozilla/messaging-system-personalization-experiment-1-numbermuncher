@@ -76,6 +76,13 @@ class CFRRemoteSettings:
             )
         return self._schema
 
+    def create_user(self):
+        kinto_tmpl = "{host:s}/accounts/{user:s}"
+        url = kinto_tmpl.format(host=self._kinto_uri, user=self._kinto_user)
+        resp = requests.put(url, json={'data': {"password": self._kinto_pass}})
+        ok = resp.status_code >= 200 and resp.status_code < 300
+        print("Created user : {:s} {:b}".format(self._kinto_user, ok))
+
     def _check_collection_exists(self, id):
         kinto_tmpl = "{host:s}/buckets/{bucket:s}/collections/{id:s}"
         url = kinto_tmpl.format(host=self._kinto_uri, bucket=self._kinto_bucket, id=id)
