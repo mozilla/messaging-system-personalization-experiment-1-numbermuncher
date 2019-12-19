@@ -9,7 +9,7 @@ RUN groupadd --gid 10001 app && \
     useradd --uid 10001 --gid 10001 --home /app --create-home app 
 
 RUN apt-get update && \
-    apt-get install -y curl && \
+    apt-get install -y curl make && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
