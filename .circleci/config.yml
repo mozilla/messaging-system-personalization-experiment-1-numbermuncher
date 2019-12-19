@@ -15,9 +15,10 @@ jobs:
       - run: ./bin/build
       - run: ./bin/deploy
   integration_test:
-    machine:
-      enable: true
+    docker:
+      - image: python:3.7-slim-buster
     steps:
+      - setup_remote_docker
       - checkout
       - run: make pytest
 
