@@ -60,22 +60,21 @@ class DataprocFacade:
     def __enter__(self):
         self.install_node_config()
         self.create_cluster_if_not_exists()
+        return self
 
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_value, exc_traceback):
         self.delete_cluster_if_exists()
 
-
-    def install_node_config(self, bucket_name='cfr-ml-jobs'):
-        """
-        """
-        src_name = pkg_resources.resource_filename("cfretl", "scripts/dataproc_custom.sh")
+    def install_node_config(self, bucket_name="cfr-ml-jobs"):
+        src_name = pkg_resources.resource_filename(
+            "cfretl", "scripts/dataproc_custom.sh"
+        )
         dst_name = "actions/python/dataproc_custom.sh"
         storage_client = storage.Client()
         bucket = storage_client.get_bucket(bucket_name)
         blob = bucket.blob(dst_name)
         blob.upload_from_filename(src_name)
         print("Uploaded {} to {}".format(src_name, dst_name))
-
 
     def dataproc_job_client(self):
         """
