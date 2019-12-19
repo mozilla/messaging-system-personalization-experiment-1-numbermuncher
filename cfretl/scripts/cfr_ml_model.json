@@ -1,1065 +1,1883 @@
 {
   "data": [
     {
-      "version": 20191213191244,
+      "version": 20191219041219,
       "models_by_cfr_id": {
         "PIN_TAB": {
-          "locale": {
-            "p_given_cfr_rejection": 0.097907254,
-            "p_given_cfr_acceptance": 0.935039407
-          },
-          "prior_cfr": {
-            "p_rejection": 0.50669764,
-            "p_acceptance": 0.49330236
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.985701395,
-            "p_given_cfr_acceptance": 0.141466629
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.795972384,
-            "p_given_cfr_acceptance": 0.130433702
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.801804153,
-            "p_given_cfr_acceptance": 0.983617232
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.934522278,
-            "p_given_cfr_acceptance": 0.942998845
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.322177844,
-            "p_given_cfr_acceptance": 0.432004927
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.808912956,
-            "p_given_cfr_acceptance": 0.977170366
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.184267346,
-            "p_given_cfr_acceptance": 0.31153368
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.254677902,
-            "p_given_cfr_acceptance": 0.030641333
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.936009487,
-            "p_given_cfr_acceptance": 0.031425697
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.506511959,
-            "p_given_cfr_acceptance": 0.576044898
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.525359216,
-            "p_given_cfr_acceptance": 0.65327353
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.040259532,
-            "p_given_cfr_acceptance": 0.039880883
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.213960287,
-            "p_given_cfr_acceptance": 0.629638689
-          }
+          "priors": [
+            0.2736140789,
+            0.7263859211
+          ],
+          "delProbs": [
+            [
+              2231,
+              2863
+            ],
+            [
+              5784,
+              447
+            ],
+            [
+              1556,
+              1420
+            ],
+            [
+              3203,
+              1558
+            ],
+            [
+              1598,
+              3946
+            ],
+            [
+              5533,
+              8006
+            ],
+            [
+              5071,
+              8700
+            ],
+            [
+              9178,
+              5518
+            ],
+            [
+              1966,
+              7076
+            ],
+            [
+              6966,
+              4059
+            ],
+            [
+              6221,
+              3052
+            ],
+            [
+              7571,
+              6919
+            ],
+            [
+              2945,
+              5325
+            ],
+            [
+              3757,
+              6007
+            ],
+            [
+              5119,
+              9550
+            ]
+          ],
+          "negProbs": [
+            [
+              2231,
+              5784,
+              1556,
+              3203,
+              1598,
+              5533,
+              5071,
+              9178,
+              1966,
+              6966,
+              6221,
+              7571,
+              2945,
+              3757,
+              5119
+            ],
+            [
+              2863,
+              447,
+              1420,
+              1558,
+              3946,
+              8006,
+              8700,
+              5518,
+              7076,
+              4059,
+              3052,
+              6919,
+              5325,
+              6007,
+              9550
+            ]
+          ]
         },
         "PIN_TAB_72": {
-          "locale": {
-            "p_given_cfr_rejection": 0.59356756,
-            "p_given_cfr_acceptance": 0.130522186
-          },
-          "prior_cfr": {
-            "p_rejection": 0.470809392,
-            "p_acceptance": 0.529190608
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.372977402,
-            "p_given_cfr_acceptance": 0.021704793
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.984517668,
-            "p_given_cfr_acceptance": 0.715778448
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.764652061,
-            "p_given_cfr_acceptance": 0.401375419
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.179324374,
-            "p_given_cfr_acceptance": 0.542701599
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.597790881,
-            "p_given_cfr_acceptance": 0.733099616
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.356820852,
-            "p_given_cfr_acceptance": 0.093013964
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.529128876,
-            "p_given_cfr_acceptance": 0.321713994
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.23532408,
-            "p_given_cfr_acceptance": 0.704101561
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.881461871,
-            "p_given_cfr_acceptance": 0.171505337
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.580223904,
-            "p_given_cfr_acceptance": 0.84442355
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.342352589,
-            "p_given_cfr_acceptance": 0.901012503
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.689193905,
-            "p_given_cfr_acceptance": 0.392749322
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.218649517,
-            "p_given_cfr_acceptance": 0.875382262
-          }
+          "priors": [
+            0.3291766889,
+            0.6708233111
+          ],
+          "delProbs": [
+            [
+              3940,
+              8932
+            ],
+            [
+              6968,
+              114
+            ],
+            [
+              224,
+              1895
+            ],
+            [
+              9059,
+              9787
+            ],
+            [
+              1538,
+              5838
+            ],
+            [
+              1937,
+              7613
+            ],
+            [
+              5103,
+              1006
+            ],
+            [
+              8963,
+              6013
+            ],
+            [
+              5312,
+              448
+            ],
+            [
+              2667,
+              5411
+            ],
+            [
+              4280,
+              6907
+            ],
+            [
+              1068,
+              434
+            ],
+            [
+              3913,
+              773
+            ],
+            [
+              99,
+              4764
+            ],
+            [
+              4700,
+              8455
+            ]
+          ],
+          "negProbs": [
+            [
+              3940,
+              6968,
+              224,
+              9059,
+              1538,
+              1937,
+              5103,
+              8963,
+              5312,
+              2667,
+              4280,
+              1068,
+              3913,
+              99,
+              4700
+            ],
+            [
+              8932,
+              114,
+              1895,
+              9787,
+              5838,
+              7613,
+              1006,
+              6013,
+              448,
+              5411,
+              6907,
+              434,
+              773,
+              4764,
+              8455
+            ]
+          ]
         },
         "SAVE_LOGIN": {
-          "locale": {
-            "p_given_cfr_rejection": 0.012416667,
-            "p_given_cfr_acceptance": 0.66101957
-          },
-          "prior_cfr": {
-            "p_rejection": 0.791885138,
-            "p_acceptance": 0.208114862
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.558039898,
-            "p_given_cfr_acceptance": 0.495954319
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.240778677,
-            "p_given_cfr_acceptance": 0.802306954
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.100561334,
-            "p_given_cfr_acceptance": 0.456584887
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.018114541,
-            "p_given_cfr_acceptance": 0.818789179
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.970933504,
-            "p_given_cfr_acceptance": 0.324047655
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.403998069,
-            "p_given_cfr_acceptance": 0.373491097
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.031664484,
-            "p_given_cfr_acceptance": 0.634907724
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.43729776,
-            "p_given_cfr_acceptance": 0.639496062
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.200817728,
-            "p_given_cfr_acceptance": 0.101163344
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.399434762,
-            "p_given_cfr_acceptance": 0.113911165
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.220290341,
-            "p_given_cfr_acceptance": 0.598237795
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.739946834,
-            "p_given_cfr_acceptance": 0.672261372
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.468810042,
-            "p_given_cfr_acceptance": 0.435405993
-          }
+          "priors": [
+            0.1002682088,
+            0.8997317912
+          ],
+          "delProbs": [
+            [
+              7310,
+              4813
+            ],
+            [
+              3181,
+              1487
+            ],
+            [
+              5386,
+              910
+            ],
+            [
+              5527,
+              9089
+            ],
+            [
+              308,
+              9114
+            ],
+            [
+              6082,
+              2373
+            ],
+            [
+              3369,
+              9588
+            ],
+            [
+              9879,
+              8118
+            ],
+            [
+              418,
+              4407
+            ],
+            [
+              6638,
+              9767
+            ],
+            [
+              4495,
+              4695
+            ],
+            [
+              6814,
+              9505
+            ],
+            [
+              3361,
+              9406
+            ],
+            [
+              5056,
+              7301
+            ],
+            [
+              2272,
+              2005
+            ]
+          ],
+          "negProbs": [
+            [
+              7310,
+              3181,
+              5386,
+              5527,
+              308,
+              6082,
+              3369,
+              9879,
+              418,
+              6638,
+              4495,
+              6814,
+              3361,
+              5056,
+              2272
+            ],
+            [
+              4813,
+              1487,
+              910,
+              9089,
+              9114,
+              2373,
+              9588,
+              8118,
+              4407,
+              9767,
+              4695,
+              9505,
+              9406,
+              7301,
+              2005
+            ]
+          ]
         },
         "SEND_TAB_CFR": {
-          "locale": {
-            "p_given_cfr_rejection": 0.761987385,
-            "p_given_cfr_acceptance": 0.770903896
-          },
-          "prior_cfr": {
-            "p_rejection": 0.725322331,
-            "p_acceptance": 0.274677669
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.458588073,
-            "p_given_cfr_acceptance": 0.473566709
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.505325968,
-            "p_given_cfr_acceptance": 0.051006186
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.602957675,
-            "p_given_cfr_acceptance": 0.086445815
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.452360879,
-            "p_given_cfr_acceptance": 0.547532649
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.607313444,
-            "p_given_cfr_acceptance": 0.9606152
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.070808535,
-            "p_given_cfr_acceptance": 0.548808992
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.005610451,
-            "p_given_cfr_acceptance": 0.732717403
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.186295562,
-            "p_given_cfr_acceptance": 0.782728709
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.225055327,
-            "p_given_cfr_acceptance": 0.645782043
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.890446025,
-            "p_given_cfr_acceptance": 0.46213874
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.328964754,
-            "p_given_cfr_acceptance": 0.995725924
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.191897388,
-            "p_given_cfr_acceptance": 0.360378718
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.125831708,
-            "p_given_cfr_acceptance": 0.193218774
-          }
+          "priors": [
+            0.4316323174,
+            0.5683676826
+          ],
+          "delProbs": [
+            [
+              5971,
+              4367
+            ],
+            [
+              8206,
+              2699
+            ],
+            [
+              9325,
+              1973
+            ],
+            [
+              9251,
+              1807
+            ],
+            [
+              866,
+              9072
+            ],
+            [
+              8736,
+              7647
+            ],
+            [
+              8934,
+              7618
+            ],
+            [
+              3190,
+              6027
+            ],
+            [
+              9458,
+              9028
+            ],
+            [
+              1404,
+              4667
+            ],
+            [
+              8077,
+              5932
+            ],
+            [
+              3788,
+              9674
+            ],
+            [
+              2701,
+              684
+            ],
+            [
+              8713,
+              7085
+            ],
+            [
+              5072,
+              7653
+            ]
+          ],
+          "negProbs": [
+            [
+              5971,
+              8206,
+              9325,
+              9251,
+              866,
+              8736,
+              8934,
+              3190,
+              9458,
+              1404,
+              8077,
+              3788,
+              2701,
+              8713,
+              5072
+            ],
+            [
+              4367,
+              2699,
+              1973,
+              1807,
+              9072,
+              7647,
+              7618,
+              6027,
+              9028,
+              4667,
+              5932,
+              9674,
+              684,
+              7085,
+              7653
+            ]
+          ]
         },
         "SAVE_LOGIN_72": {
-          "locale": {
-            "p_given_cfr_rejection": 0.352077961,
-            "p_given_cfr_acceptance": 0.667119808
-          },
-          "prior_cfr": {
-            "p_rejection": 0.217821153,
-            "p_acceptance": 0.782178847
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.191103923,
-            "p_given_cfr_acceptance": 0.955219757
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.970685575,
-            "p_given_cfr_acceptance": 0.472293609
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.699058527,
-            "p_given_cfr_acceptance": 0.071038651
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.030978963,
-            "p_given_cfr_acceptance": 0.657998009
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.261891682,
-            "p_given_cfr_acceptance": 0.546233184
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.45124516,
-            "p_given_cfr_acceptance": 0.318433004
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.481440408,
-            "p_given_cfr_acceptance": 0.242124311
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.911851106,
-            "p_given_cfr_acceptance": 0.785869494
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.259106003,
-            "p_given_cfr_acceptance": 0.781986318
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.652332865,
-            "p_given_cfr_acceptance": 0.083165747
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.483614714,
-            "p_given_cfr_acceptance": 0.128671961
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.916010038,
-            "p_given_cfr_acceptance": 0.370974149
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.771427375,
-            "p_given_cfr_acceptance": 0.861157908
-          }
+          "priors": [
+            0.8257164974,
+            0.1742835026
+          ],
+          "delProbs": [
+            [
+              8098,
+              4077
+            ],
+            [
+              2951,
+              4758
+            ],
+            [
+              7157,
+              4807
+            ],
+            [
+              8450,
+              3123
+            ],
+            [
+              8578,
+              9085
+            ],
+            [
+              7028,
+              6478
+            ],
+            [
+              6992,
+              6773
+            ],
+            [
+              6065,
+              5701
+            ],
+            [
+              4225,
+              4707
+            ],
+            [
+              598,
+              5129
+            ],
+            [
+              2923,
+              1980
+            ],
+            [
+              271,
+              3518
+            ],
+            [
+              8643,
+              4850
+            ],
+            [
+              1301,
+              3194
+            ],
+            [
+              762,
+              5215
+            ]
+          ],
+          "negProbs": [
+            [
+              8098,
+              2951,
+              7157,
+              8450,
+              8578,
+              7028,
+              6992,
+              6065,
+              4225,
+              598,
+              2923,
+              271,
+              8643,
+              1301,
+              762
+            ],
+            [
+              4077,
+              4758,
+              4807,
+              3123,
+              9085,
+              6478,
+              6773,
+              5701,
+              4707,
+              5129,
+              1980,
+              3518,
+              4850,
+              3194,
+              5215
+            ]
+          ]
         },
         "WNP_MOMENTS_1": {
-          "locale": {
-            "p_given_cfr_rejection": 0.014463564,
-            "p_given_cfr_acceptance": 0.651332259
-          },
-          "prior_cfr": {
-            "p_rejection": 0.982404956,
-            "p_acceptance": 0.017595044
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.503755922,
-            "p_given_cfr_acceptance": 0.626934441
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.693626982,
-            "p_given_cfr_acceptance": 0.906627903
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.338663109,
-            "p_given_cfr_acceptance": 0.242332323
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.477868182,
-            "p_given_cfr_acceptance": 0.11501551
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.765366892,
-            "p_given_cfr_acceptance": 0.967303006
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.433683398,
-            "p_given_cfr_acceptance": 0.101999284
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.942311019,
-            "p_given_cfr_acceptance": 0.027171668
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.799337264,
-            "p_given_cfr_acceptance": 0.74296452
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.210309295,
-            "p_given_cfr_acceptance": 0.111464572
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.462548872,
-            "p_given_cfr_acceptance": 0.757211491
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.9081099,
-            "p_given_cfr_acceptance": 0.977567842
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.031774509,
-            "p_given_cfr_acceptance": 0.253524575
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.543298502,
-            "p_given_cfr_acceptance": 0.86614873
-          }
+          "priors": [
+            0.3471677231,
+            0.6528322769
+          ],
+          "delProbs": [
+            [
+              5721,
+              3437
+            ],
+            [
+              6212,
+              602
+            ],
+            [
+              5967,
+              2098
+            ],
+            [
+              4396,
+              4703
+            ],
+            [
+              693,
+              8243
+            ],
+            [
+              7517,
+              495
+            ],
+            [
+              8923,
+              908
+            ],
+            [
+              2081,
+              695
+            ],
+            [
+              5396,
+              3138
+            ],
+            [
+              5168,
+              77
+            ],
+            [
+              8846,
+              2821
+            ],
+            [
+              1215,
+              2340
+            ],
+            [
+              4511,
+              2176
+            ],
+            [
+              9010,
+              4699
+            ],
+            [
+              4604,
+              2213
+            ]
+          ],
+          "negProbs": [
+            [
+              5721,
+              6212,
+              5967,
+              4396,
+              693,
+              7517,
+              8923,
+              2081,
+              5396,
+              5168,
+              8846,
+              1215,
+              4511,
+              9010,
+              4604
+            ],
+            [
+              3437,
+              602,
+              2098,
+              4703,
+              8243,
+              495,
+              908,
+              695,
+              3138,
+              77,
+              2821,
+              2340,
+              2176,
+              4699,
+              2213
+            ]
+          ]
         },
         "WNP_MOMENTS_2": {
-          "locale": {
-            "p_given_cfr_rejection": 0.549165369,
-            "p_given_cfr_acceptance": 0.788973972
-          },
-          "prior_cfr": {
-            "p_rejection": 0.22194065,
-            "p_acceptance": 0.77805935
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.694267042,
-            "p_given_cfr_acceptance": 0.914553081
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.29397902,
-            "p_given_cfr_acceptance": 0.715630514
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.130240946,
-            "p_given_cfr_acceptance": 0.799896317
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.553867521,
-            "p_given_cfr_acceptance": 0.728338693
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.266767443,
-            "p_given_cfr_acceptance": 0.97228547
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.577338861,
-            "p_given_cfr_acceptance": 0.186136649
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.410635441,
-            "p_given_cfr_acceptance": 0.395544367
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.1657926,
-            "p_given_cfr_acceptance": 0.532877124
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.206004864,
-            "p_given_cfr_acceptance": 0.059414171
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.248447843,
-            "p_given_cfr_acceptance": 0.517061312
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.870322832,
-            "p_given_cfr_acceptance": 0.465395203
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.85112637,
-            "p_given_cfr_acceptance": 0.734941434
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.474944027,
-            "p_given_cfr_acceptance": 0.837190264
-          }
+          "priors": [
+            0.1444903979,
+            0.8555096021
+          ],
+          "delProbs": [
+            [
+              6910,
+              1622
+            ],
+            [
+              6850,
+              1535
+            ],
+            [
+              7880,
+              3049
+            ],
+            [
+              7941,
+              987
+            ],
+            [
+              2157,
+              2695
+            ],
+            [
+              8628,
+              4380
+            ],
+            [
+              499,
+              5580
+            ],
+            [
+              9578,
+              2390
+            ],
+            [
+              7347,
+              7202
+            ],
+            [
+              4250,
+              6883
+            ],
+            [
+              5711,
+              1225
+            ],
+            [
+              2254,
+              2954
+            ],
+            [
+              9298,
+              1276
+            ],
+            [
+              9056,
+              6261
+            ],
+            [
+              8546,
+              4801
+            ]
+          ],
+          "negProbs": [
+            [
+              6910,
+              6850,
+              7880,
+              7941,
+              2157,
+              8628,
+              499,
+              9578,
+              7347,
+              4250,
+              5711,
+              2254,
+              9298,
+              9056,
+              8546
+            ],
+            [
+              1622,
+              1535,
+              3049,
+              987,
+              2695,
+              4380,
+              5580,
+              2390,
+              7202,
+              6883,
+              1225,
+              2954,
+              1276,
+              6261,
+              4801
+            ]
+          ]
         },
         "PDF_URL_FFX_SEND": {
-          "locale": {
-            "p_given_cfr_rejection": 0.113205233,
-            "p_given_cfr_acceptance": 0.74116664
-          },
-          "prior_cfr": {
-            "p_rejection": 0.669779209,
-            "p_acceptance": 0.330220791
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.674851459,
-            "p_given_cfr_acceptance": 0.308628413
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.908731271,
-            "p_given_cfr_acceptance": 0.166371366
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.36609085,
-            "p_given_cfr_acceptance": 0.896528444
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.161290281,
-            "p_given_cfr_acceptance": 0.059168467
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.284414756,
-            "p_given_cfr_acceptance": 0.533565228
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.223410884,
-            "p_given_cfr_acceptance": 0.743349662
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.086887725,
-            "p_given_cfr_acceptance": 0.934172889
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.935305121,
-            "p_given_cfr_acceptance": 0.231678993
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.734666787,
-            "p_given_cfr_acceptance": 0.382279749
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.894411497,
-            "p_given_cfr_acceptance": 0.480751182
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.089900743,
-            "p_given_cfr_acceptance": 0.51695782
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.671206204,
-            "p_given_cfr_acceptance": 0.802280922
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.14884364,
-            "p_given_cfr_acceptance": 0.39941848
-          }
+          "priors": [
+            0.152219802,
+            0.847780198
+          ],
+          "delProbs": [
+            [
+              6381,
+              8996
+            ],
+            [
+              4901,
+              6913
+            ],
+            [
+              9295,
+              2767
+            ],
+            [
+              4208,
+              738
+            ],
+            [
+              8679,
+              2244
+            ],
+            [
+              7835,
+              4767
+            ],
+            [
+              5864,
+              2183
+            ],
+            [
+              5168,
+              7051
+            ],
+            [
+              3910,
+              1661
+            ],
+            [
+              7799,
+              9350
+            ],
+            [
+              5480,
+              9717
+            ],
+            [
+              2969,
+              4100
+            ],
+            [
+              1982,
+              8475
+            ],
+            [
+              8202,
+              3728
+            ],
+            [
+              6556,
+              243
+            ]
+          ],
+          "negProbs": [
+            [
+              6381,
+              4901,
+              9295,
+              4208,
+              8679,
+              7835,
+              5864,
+              5168,
+              3910,
+              7799,
+              5480,
+              2969,
+              1982,
+              8202,
+              6556
+            ],
+            [
+              8996,
+              6913,
+              2767,
+              738,
+              2244,
+              4767,
+              2183,
+              7051,
+              1661,
+              9350,
+              9717,
+              4100,
+              8475,
+              3728,
+              243
+            ]
+          ]
         },
         "BOOKMARK_SYNC_CFR": {
-          "locale": {
-            "p_given_cfr_rejection": 0.455332435,
-            "p_given_cfr_acceptance": 0.75149431
-          },
-          "prior_cfr": {
-            "p_rejection": 0.277164753,
-            "p_acceptance": 0.722835247
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.218175313,
-            "p_given_cfr_acceptance": 0.350750116
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.14763038,
-            "p_given_cfr_acceptance": 0.50761179
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.1439081,
-            "p_given_cfr_acceptance": 0.951034649
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.009135598,
-            "p_given_cfr_acceptance": 0.309835959
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.48163734,
-            "p_given_cfr_acceptance": 0.867231267
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.132139711,
-            "p_given_cfr_acceptance": 0.092130111
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.700656682,
-            "p_given_cfr_acceptance": 0.811917695
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.044992713,
-            "p_given_cfr_acceptance": 0.88889485
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.569787534,
-            "p_given_cfr_acceptance": 0.949414282
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.714362687,
-            "p_given_cfr_acceptance": 0.125173198
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.214935671,
-            "p_given_cfr_acceptance": 0.389401986
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.993001429,
-            "p_given_cfr_acceptance": 0.311131633
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.713449004,
-            "p_given_cfr_acceptance": 0.114210102
-          }
+          "priors": [
+            0.5708076498,
+            0.4291923502
+          ],
+          "delProbs": [
+            [
+              7329,
+              5150
+            ],
+            [
+              9822,
+              2780
+            ],
+            [
+              8596,
+              4591
+            ],
+            [
+              3010,
+              6193
+            ],
+            [
+              8322,
+              6674
+            ],
+            [
+              482,
+              2642
+            ],
+            [
+              4708,
+              1377
+            ],
+            [
+              4160,
+              3968
+            ],
+            [
+              6951,
+              1914
+            ],
+            [
+              3301,
+              3660
+            ],
+            [
+              7760,
+              6846
+            ],
+            [
+              9050,
+              8022
+            ],
+            [
+              1265,
+              5117
+            ],
+            [
+              3749,
+              6805
+            ],
+            [
+              6593,
+              8438
+            ]
+          ],
+          "negProbs": [
+            [
+              7329,
+              9822,
+              8596,
+              3010,
+              8322,
+              482,
+              4708,
+              4160,
+              6951,
+              3301,
+              7760,
+              9050,
+              1265,
+              3749,
+              6593
+            ],
+            [
+              5150,
+              2780,
+              4591,
+              6193,
+              6674,
+              2642,
+              1377,
+              3968,
+              1914,
+              3660,
+              6846,
+              8022,
+              5117,
+              6805,
+              8438
+            ]
+          ]
         },
         "MILESTONE_MESSAGE": {
-          "locale": {
-            "p_given_cfr_rejection": 0.561451727,
-            "p_given_cfr_acceptance": 0.510812544
-          },
-          "prior_cfr": {
-            "p_rejection": 0.587354575,
-            "p_acceptance": 0.412645425
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.201787051,
-            "p_given_cfr_acceptance": 0.258059783
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.906555341,
-            "p_given_cfr_acceptance": 0.969010336
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.658740327,
-            "p_given_cfr_acceptance": 0.422045346
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.610929133,
-            "p_given_cfr_acceptance": 0.582347759
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.542656143,
-            "p_given_cfr_acceptance": 0.132198124
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.259912926,
-            "p_given_cfr_acceptance": 0.749796789
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.890270428,
-            "p_given_cfr_acceptance": 0.015954404
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.171180976,
-            "p_given_cfr_acceptance": 0.511905805
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.524940859,
-            "p_given_cfr_acceptance": 0.990010753
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.749736293,
-            "p_given_cfr_acceptance": 0.895739579
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.859311131,
-            "p_given_cfr_acceptance": 0.348279409
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.003852428,
-            "p_given_cfr_acceptance": 0.586435322
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.754326396,
-            "p_given_cfr_acceptance": 0.000550936
-          }
+          "priors": [
+            0.6110060452,
+            0.3889939548
+          ],
+          "delProbs": [
+            [
+              2830,
+              1541
+            ],
+            [
+              1507,
+              3697
+            ],
+            [
+              7720,
+              8000
+            ],
+            [
+              9501,
+              4157
+            ],
+            [
+              5591,
+              7516
+            ],
+            [
+              4174,
+              2792
+            ],
+            [
+              3279,
+              7017
+            ],
+            [
+              6254,
+              9253
+            ],
+            [
+              8916,
+              2297
+            ],
+            [
+              1928,
+              863
+            ],
+            [
+              397,
+              6978
+            ],
+            [
+              1144,
+              2034
+            ],
+            [
+              9497,
+              8949
+            ],
+            [
+              1514,
+              4768
+            ],
+            [
+              5562,
+              9134
+            ]
+          ],
+          "negProbs": [
+            [
+              2830,
+              1507,
+              7720,
+              9501,
+              5591,
+              4174,
+              3279,
+              6254,
+              8916,
+              1928,
+              397,
+              1144,
+              9497,
+              1514,
+              5562
+            ],
+            [
+              1541,
+              3697,
+              8000,
+              4157,
+              7516,
+              2792,
+              7017,
+              9253,
+              2297,
+              863,
+              6978,
+              2034,
+              8949,
+              4768,
+              9134
+            ]
+          ]
         },
         "YOUTUBE_ENHANCE_3": {
-          "locale": {
-            "p_given_cfr_rejection": 0.123242125,
-            "p_given_cfr_acceptance": 0.77883016
-          },
-          "prior_cfr": {
-            "p_rejection": 0.859676258,
-            "p_acceptance": 0.140323742
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.032369473,
-            "p_given_cfr_acceptance": 0.173697334
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.643078428,
-            "p_given_cfr_acceptance": 0.345718909
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.776306209,
-            "p_given_cfr_acceptance": 0.987755113
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.682647748,
-            "p_given_cfr_acceptance": 0.942635325
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.583440927,
-            "p_given_cfr_acceptance": 0.890823161
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.63282283,
-            "p_given_cfr_acceptance": 0.297415971
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.834826397,
-            "p_given_cfr_acceptance": 0.079388557
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.189672599,
-            "p_given_cfr_acceptance": 0.2912856
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.151489867,
-            "p_given_cfr_acceptance": 0.544552547
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.322318478,
-            "p_given_cfr_acceptance": 0.11516922
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.961363656,
-            "p_given_cfr_acceptance": 0.397947648
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.409088725,
-            "p_given_cfr_acceptance": 0.257203832
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.598889372,
-            "p_given_cfr_acceptance": 0.591795723
-          }
+          "priors": [
+            0.7355211622,
+            0.2644788378
+          ],
+          "delProbs": [
+            [
+              423,
+              5702
+            ],
+            [
+              6587,
+              8539
+            ],
+            [
+              2566,
+              9307
+            ],
+            [
+              439,
+              8150
+            ],
+            [
+              358,
+              9504
+            ],
+            [
+              8551,
+              2409
+            ],
+            [
+              5460,
+              6993
+            ],
+            [
+              4296,
+              2785
+            ],
+            [
+              892,
+              6349
+            ],
+            [
+              6689,
+              2751
+            ],
+            [
+              7025,
+              790
+            ],
+            [
+              7246,
+              6540
+            ],
+            [
+              2724,
+              5933
+            ],
+            [
+              1154,
+              1404
+            ],
+            [
+              1798,
+              4592
+            ]
+          ],
+          "negProbs": [
+            [
+              423,
+              6587,
+              2566,
+              439,
+              358,
+              8551,
+              5460,
+              4296,
+              892,
+              6689,
+              7025,
+              7246,
+              2724,
+              1154,
+              1798
+            ],
+            [
+              5702,
+              8539,
+              9307,
+              8150,
+              9504,
+              2409,
+              6993,
+              2785,
+              6349,
+              2751,
+              790,
+              6540,
+              5933,
+              1404,
+              4592
+            ]
+          ]
         },
         "GOOGLE_TRANSLATE_3": {
-          "locale": {
-            "p_given_cfr_rejection": 0.123626507,
-            "p_given_cfr_acceptance": 0.760818648
-          },
-          "prior_cfr": {
-            "p_rejection": 0.544837459,
-            "p_acceptance": 0.455162541
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.233958432,
-            "p_given_cfr_acceptance": 0.835061141
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.818880561,
-            "p_given_cfr_acceptance": 0.401628425
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.897888661,
-            "p_given_cfr_acceptance": 0.486851144
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.55152395,
-            "p_given_cfr_acceptance": 0.278691827
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.895856507,
-            "p_given_cfr_acceptance": 0.279275655
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.880212398,
-            "p_given_cfr_acceptance": 0.648036692
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.623052595,
-            "p_given_cfr_acceptance": 0.654186118
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.24146722,
-            "p_given_cfr_acceptance": 0.602494789
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.10751824,
-            "p_given_cfr_acceptance": 0.058874437
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.277936522,
-            "p_given_cfr_acceptance": 0.290916383
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.323115368,
-            "p_given_cfr_acceptance": 0.792527698
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.063863706,
-            "p_given_cfr_acceptance": 0.221942959
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.08032495,
-            "p_given_cfr_acceptance": 0.719433523
-          }
+          "priors": [
+            0.3470402818,
+            0.6529597182
+          ],
+          "delProbs": [
+            [
+              1542,
+              3933
+            ],
+            [
+              2854,
+              7353
+            ],
+            [
+              3614,
+              8000
+            ],
+            [
+              7141,
+              7178
+            ],
+            [
+              8666,
+              5437
+            ],
+            [
+              49,
+              8726
+            ],
+            [
+              7001,
+              1494
+            ],
+            [
+              1003,
+              4211
+            ],
+            [
+              7928,
+              7915
+            ],
+            [
+              9730,
+              5000
+            ],
+            [
+              2272,
+              5620
+            ],
+            [
+              6514,
+              5991
+            ],
+            [
+              2141,
+              8704
+            ],
+            [
+              4215,
+              885
+            ],
+            [
+              41,
+              7131
+            ]
+          ],
+          "negProbs": [
+            [
+              1542,
+              2854,
+              3614,
+              7141,
+              8666,
+              49,
+              7001,
+              1003,
+              7928,
+              9730,
+              2272,
+              6514,
+              2141,
+              4215,
+              41
+            ],
+            [
+              3933,
+              7353,
+              8000,
+              7178,
+              5437,
+              8726,
+              1494,
+              4211,
+              7915,
+              5000,
+              5620,
+              5991,
+              8704,
+              885,
+              7131
+            ]
+          ]
+        },
+        "WNP_MOMENTS_MOBILE": {
+          "priors": [
+            0.2854345957,
+            0.7145654043
+          ],
+          "delProbs": [
+            [
+              8237,
+              4885
+            ],
+            [
+              7130,
+              4741
+            ],
+            [
+              7605,
+              9741
+            ],
+            [
+              8397,
+              7935
+            ],
+            [
+              7391,
+              9412
+            ],
+            [
+              7743,
+              7246
+            ],
+            [
+              9917,
+              6472
+            ],
+            [
+              61,
+              962
+            ],
+            [
+              3289,
+              9008
+            ],
+            [
+              2650,
+              4203
+            ],
+            [
+              2628,
+              3781
+            ],
+            [
+              9480,
+              2687
+            ],
+            [
+              7602,
+              6164
+            ],
+            [
+              46,
+              6621
+            ],
+            [
+              2258,
+              6154
+            ]
+          ],
+          "negProbs": [
+            [
+              8237,
+              7130,
+              7605,
+              8397,
+              7391,
+              7743,
+              9917,
+              61,
+              3289,
+              2650,
+              2628,
+              9480,
+              7602,
+              46,
+              2258
+            ],
+            [
+              4885,
+              4741,
+              9741,
+              7935,
+              9412,
+              7246,
+              6472,
+              962,
+              9008,
+              4203,
+              3781,
+              2687,
+              6164,
+              6621,
+              6154
+            ]
+          ]
         },
         "SEND_RECIPE_TAB_CFR": {
-          "locale": {
-            "p_given_cfr_rejection": 0.63724232,
-            "p_given_cfr_acceptance": 0.74572077
-          },
-          "prior_cfr": {
-            "p_rejection": 0.963032392,
-            "p_acceptance": 0.036967608
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.946384526,
-            "p_given_cfr_acceptance": 0.357888008
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.730228854,
-            "p_given_cfr_acceptance": 0.443814436
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.944134686,
-            "p_given_cfr_acceptance": 0.773061592
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.970594573,
-            "p_given_cfr_acceptance": 0.204381963
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.609953961,
-            "p_given_cfr_acceptance": 0.153931608
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.744465121,
-            "p_given_cfr_acceptance": 0.718193977
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.41654562,
-            "p_given_cfr_acceptance": 0.798076859
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.30439811,
-            "p_given_cfr_acceptance": 0.098401306
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.850098623,
-            "p_given_cfr_acceptance": 0.860599421
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.169270173,
-            "p_given_cfr_acceptance": 0.990166302
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.677253424,
-            "p_given_cfr_acceptance": 0.967315141
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.12110548,
-            "p_given_cfr_acceptance": 0.889083464
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.906245756,
-            "p_given_cfr_acceptance": 0.089376485
-          }
+          "priors": [
+            0.6027104369,
+            0.3972895631
+          ],
+          "delProbs": [
+            [
+              3306,
+              4418
+            ],
+            [
+              3496,
+              2234
+            ],
+            [
+              3007,
+              9708
+            ],
+            [
+              4078,
+              4411
+            ],
+            [
+              2901,
+              8306
+            ],
+            [
+              4733,
+              5481
+            ],
+            [
+              3538,
+              5023
+            ],
+            [
+              4864,
+              7268
+            ],
+            [
+              1811,
+              7542
+            ],
+            [
+              5779,
+              9477
+            ],
+            [
+              4496,
+              3384
+            ],
+            [
+              6465,
+              8618
+            ],
+            [
+              7465,
+              3194
+            ],
+            [
+              3242,
+              6904
+            ],
+            [
+              1187,
+              8504
+            ]
+          ],
+          "negProbs": [
+            [
+              3306,
+              3496,
+              3007,
+              4078,
+              2901,
+              4733,
+              3538,
+              4864,
+              1811,
+              5779,
+              4496,
+              6465,
+              7465,
+              3242,
+              1187
+            ],
+            [
+              4418,
+              2234,
+              9708,
+              4411,
+              8306,
+              5481,
+              5023,
+              7268,
+              7542,
+              9477,
+              3384,
+              8618,
+              3194,
+              6904,
+              8504
+            ]
+          ]
         },
         "FACEBOOK_CONTAINER_3": {
-          "locale": {
-            "p_given_cfr_rejection": 0.598345943,
-            "p_given_cfr_acceptance": 0.51197047
-          },
-          "prior_cfr": {
-            "p_rejection": 0.507429804,
-            "p_acceptance": 0.492570196
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.482230446,
-            "p_given_cfr_acceptance": 0.006079791
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.156009075,
-            "p_given_cfr_acceptance": 0.654829702
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.389274748,
-            "p_given_cfr_acceptance": 0.346562239
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.223407649,
-            "p_given_cfr_acceptance": 0.290802373
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.16986792,
-            "p_given_cfr_acceptance": 0.406561102
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.596795813,
-            "p_given_cfr_acceptance": 0.05201176
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.616723578,
-            "p_given_cfr_acceptance": 0.816216228
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.302700186,
-            "p_given_cfr_acceptance": 0.396206488
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.546548301,
-            "p_given_cfr_acceptance": 0.842658219
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.475307143,
-            "p_given_cfr_acceptance": 0.289834707
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.100592962,
-            "p_given_cfr_acceptance": 0.223231207
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.777579553,
-            "p_given_cfr_acceptance": 0.70154518
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.720828561,
-            "p_given_cfr_acceptance": 0.519806227
-          }
+          "priors": [
+            0.4952359685,
+            0.5047640315
+          ],
+          "delProbs": [
+            [
+              9568,
+              7105
+            ],
+            [
+              8063,
+              9233
+            ],
+            [
+              7236,
+              4376
+            ],
+            [
+              1456,
+              6433
+            ],
+            [
+              7743,
+              1328
+            ],
+            [
+              8153,
+              5602
+            ],
+            [
+              4346,
+              6252
+            ],
+            [
+              7502,
+              2226
+            ],
+            [
+              152,
+              8705
+            ],
+            [
+              7192,
+              2519
+            ],
+            [
+              156,
+              4365
+            ],
+            [
+              1499,
+              3064
+            ],
+            [
+              1679,
+              3677
+            ],
+            [
+              9613,
+              3174
+            ],
+            [
+              1233,
+              513
+            ]
+          ],
+          "negProbs": [
+            [
+              9568,
+              8063,
+              7236,
+              1456,
+              7743,
+              8153,
+              4346,
+              7502,
+              152,
+              7192,
+              156,
+              1499,
+              1679,
+              9613,
+              1233
+            ],
+            [
+              7105,
+              9233,
+              4376,
+              6433,
+              1328,
+              5602,
+              6252,
+              2226,
+              8705,
+              2519,
+              4365,
+              3064,
+              3677,
+              3174,
+              513
+            ]
+          ]
         },
         "YOUTUBE_ENHANCE_3_72": {
-          "locale": {
-            "p_given_cfr_rejection": 0.266675891,
-            "p_given_cfr_acceptance": 0.72856976
-          },
-          "prior_cfr": {
-            "p_rejection": 0.946254003,
-            "p_acceptance": 0.053745997
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.202052885,
-            "p_given_cfr_acceptance": 0.54572199
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.529043434,
-            "p_given_cfr_acceptance": 0.032625313
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.651714779,
-            "p_given_cfr_acceptance": 0.029004983
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.101866255,
-            "p_given_cfr_acceptance": 0.330995394
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.748869564,
-            "p_given_cfr_acceptance": 0.156459995
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.156521375,
-            "p_given_cfr_acceptance": 0.58903036
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.027011983,
-            "p_given_cfr_acceptance": 0.27808698
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.842901726,
-            "p_given_cfr_acceptance": 0.506821888
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.480675893,
-            "p_given_cfr_acceptance": 0.780814149
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.673984939,
-            "p_given_cfr_acceptance": 0.944162132
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.36226437,
-            "p_given_cfr_acceptance": 0.804912592
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.390765692,
-            "p_given_cfr_acceptance": 0.784656918
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.678434707,
-            "p_given_cfr_acceptance": 0.427463442
-          }
+          "priors": [
+            0.8801086241,
+            0.1198913759
+          ],
+          "delProbs": [
+            [
+              3247,
+              7310
+            ],
+            [
+              7317,
+              2399
+            ],
+            [
+              3499,
+              3470
+            ],
+            [
+              7779,
+              5178
+            ],
+            [
+              7706,
+              7585
+            ],
+            [
+              5073,
+              8457
+            ],
+            [
+              7114,
+              5369
+            ],
+            [
+              5576,
+              464
+            ],
+            [
+              9440,
+              9501
+            ],
+            [
+              5552,
+              5802
+            ],
+            [
+              4960,
+              849
+            ],
+            [
+              641,
+              9980
+            ],
+            [
+              1032,
+              2324
+            ],
+            [
+              7356,
+              1822
+            ],
+            [
+              8050,
+              291
+            ]
+          ],
+          "negProbs": [
+            [
+              3247,
+              7317,
+              3499,
+              7779,
+              7706,
+              5073,
+              7114,
+              5576,
+              9440,
+              5552,
+              4960,
+              641,
+              1032,
+              7356,
+              8050
+            ],
+            [
+              7310,
+              2399,
+              3470,
+              5178,
+              7585,
+              8457,
+              5369,
+              464,
+              9501,
+              5802,
+              849,
+              9980,
+              2324,
+              1822,
+              291
+            ]
+          ]
         },
         "GOOGLE_TRANSLATE_3_72": {
-          "locale": {
-            "p_given_cfr_rejection": 0.789329719,
-            "p_given_cfr_acceptance": 0.838869936
-          },
-          "prior_cfr": {
-            "p_rejection": 0.59465253,
-            "p_acceptance": 0.40534747
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.361045841,
-            "p_given_cfr_acceptance": 0.954974557
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.297279837,
-            "p_given_cfr_acceptance": 0.572040352
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.199114701,
-            "p_given_cfr_acceptance": 0.099989769
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.501813252,
-            "p_given_cfr_acceptance": 0.590754047
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.384522296,
-            "p_given_cfr_acceptance": 0.497896737
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.429300344,
-            "p_given_cfr_acceptance": 0.315973847
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.001024325,
-            "p_given_cfr_acceptance": 0.28479777
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.658684095,
-            "p_given_cfr_acceptance": 0.807771576
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.331551554,
-            "p_given_cfr_acceptance": 0.975967487
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.553006284,
-            "p_given_cfr_acceptance": 0.273180411
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.581437861,
-            "p_given_cfr_acceptance": 0.145509469
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.89722124,
-            "p_given_cfr_acceptance": 0.710658583
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.909431041,
-            "p_given_cfr_acceptance": 0.227350502
-          }
+          "priors": [
+            0.1558915699,
+            0.8441084301
+          ],
+          "delProbs": [
+            [
+              425,
+              9498
+            ],
+            [
+              2420,
+              3524
+            ],
+            [
+              745,
+              2965
+            ],
+            [
+              354,
+              7413
+            ],
+            [
+              3668,
+              4686
+            ],
+            [
+              9670,
+              2990
+            ],
+            [
+              7610,
+              3793
+            ],
+            [
+              2261,
+              824
+            ],
+            [
+              7039,
+              7105
+            ],
+            [
+              2383,
+              9056
+            ],
+            [
+              9682,
+              312
+            ],
+            [
+              9752,
+              3674
+            ],
+            [
+              2934,
+              7914
+            ],
+            [
+              385,
+              8812
+            ],
+            [
+              559,
+              8018
+            ]
+          ],
+          "negProbs": [
+            [
+              425,
+              2420,
+              745,
+              354,
+              3668,
+              9670,
+              7610,
+              2261,
+              7039,
+              2383,
+              9682,
+              9752,
+              2934,
+              385,
+              559
+            ],
+            [
+              9498,
+              3524,
+              2965,
+              7413,
+              4686,
+              2990,
+              3793,
+              824,
+              7105,
+              9056,
+              312,
+              3674,
+              7914,
+              8812,
+              8018
+            ]
+          ]
         },
         "FACEBOOK_CONTAINER_3_72": {
-          "locale": {
-            "p_given_cfr_rejection": 0.354799905,
-            "p_given_cfr_acceptance": 0.71655232
-          },
-          "prior_cfr": {
-            "p_rejection": 0.795170484,
-            "p_acceptance": 0.204829516
-          },
-          "profile_age": {
-            "p_given_cfr_rejection": 0.149463338,
-            "p_given_cfr_acceptance": 0.004832102
-          },
-          "active_ticks": {
-            "p_given_cfr_rejection": 0.533098679,
-            "p_given_cfr_acceptance": 0.826051378
-          },
-          "total_uri_count": {
-            "p_given_cfr_rejection": 0.766855149,
-            "p_given_cfr_acceptance": 0.074029775
-          },
-          "dark_mode_active": {
-            "p_given_cfr_rejection": 0.521657694,
-            "p_given_cfr_acceptance": 0.08524897
-          },
-          "total_bookmarks_count": {
-            "p_given_cfr_rejection": 0.760728133,
-            "p_given_cfr_acceptance": 0.404745224
-          },
-          "main_monitor_screen_width": {
-            "p_given_cfr_rejection": 0.83391283,
-            "p_given_cfr_acceptance": 0.872579999
-          },
-          "firefox_accounts_configured": {
-            "p_given_cfr_rejection": 0.636682094,
-            "p_given_cfr_acceptance": 0.12117132
-          },
-          "have_firefox_as_default_browser": {
-            "p_given_cfr_rejection": 0.436930871,
-            "p_given_cfr_acceptance": 0.339613473
-          },
-          "has_at_least_one_self_installed_addon": {
-            "p_given_cfr_rejection": 0.42843951,
-            "p_given_cfr_acceptance": 0.132971039
-          },
-          "has_at_least_one_self_installed_theme": {
-            "p_given_cfr_rejection": 0.487217247,
-            "p_given_cfr_acceptance": 0.901503865
-          },
-          "about_preferences_non_default_value_count": {
-            "p_given_cfr_rejection": 0.4018569,
-            "p_given_cfr_acceptance": 0.2187607
-          },
-          "has_at_least_two_logins_saved_in_the_browser": {
-            "p_given_cfr_rejection": 0.970471728,
-            "p_given_cfr_acceptance": 0.595970793
-          },
-          "has_at_least_one_self_installed_password_manager": {
-            "p_given_cfr_rejection": 0.19683941,
-            "p_given_cfr_acceptance": 0.903759875
-          }
+          "priors": [
+            0.2709811128,
+            0.7290188872
+          ],
+          "delProbs": [
+            [
+              723,
+              1605
+            ],
+            [
+              1115,
+              1959
+            ],
+            [
+              7530,
+              3658
+            ],
+            [
+              3226,
+              5864
+            ],
+            [
+              3184,
+              6837
+            ],
+            [
+              2126,
+              8326
+            ],
+            [
+              1055,
+              8319
+            ],
+            [
+              8315,
+              9635
+            ],
+            [
+              782,
+              8411
+            ],
+            [
+              3779,
+              5300
+            ],
+            [
+              952,
+              9758
+            ],
+            [
+              2693,
+              1446
+            ],
+            [
+              793,
+              6667
+            ],
+            [
+              7773,
+              6472
+            ],
+            [
+              4220,
+              1652
+            ]
+          ],
+          "negProbs": [
+            [
+              723,
+              1115,
+              7530,
+              3226,
+              3184,
+              2126,
+              1055,
+              8315,
+              782,
+              3779,
+              952,
+              2693,
+              793,
+              7773,
+              4220
+            ],
+            [
+              1605,
+              1959,
+              3658,
+              5864,
+              6837,
+              8326,
+              8319,
+              9635,
+              8411,
+              5300,
+              9758,
+              1446,
+              6667,
+              6472,
+              1652
+            ]
+          ]
         }
       },
-      "id": "cfr-ml-model",
-      "last_modified": 1576266358764
+      "id": "vng1141-cfr-ml-model",
+      "last_modified": 1576730484114
     }
   ]
 }
