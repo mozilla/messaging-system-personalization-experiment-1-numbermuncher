@@ -18,8 +18,10 @@ jobs:
     docker:
       - image: python:3.7-slim-buster
     steps:
-      - setup_remote_docker
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: apt-get update; apt-get install make -y
       - run: make pytest
 
 workflows:
