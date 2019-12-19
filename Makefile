@@ -34,6 +34,13 @@ run_gcr:
 		-e GOOGLE_CLOUD_PROJECT=cfr-personalization-experiment \
 		-it gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
 
+bash_gcr:
+	# Start up bash in the container
+	docker run -v ~/.config:/app/.config \
+				-e GOOGLE_CLOUD_PROJECT=cfr-personalization-experiment \
+				--entrypoint=/bin/bash  \
+				-it gcr.io/cfr-personalization-experiment/cfr-numbermuncher:latest
+
 
 cluster:
 	gcloud dataproc clusters create cfr-sklearn-cluster3 \

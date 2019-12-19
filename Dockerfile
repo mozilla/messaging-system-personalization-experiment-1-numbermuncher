@@ -26,4 +26,4 @@ COPY . /app
 RUN python setup.py install
 USER app
 
-ENTRYPOINT ["/usr/local/bin/python", "-m", "cfretl.main"]
+CMD ["/usr/local/bin/python", "-m", "cfretl.main"]
