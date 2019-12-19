@@ -9,6 +9,7 @@ auth:
 	gcloud auth application-default login
 
 pytest:
+	pip install -r requirements.txt
 	python setup.py develop
 	python setup.py test
 	flake8 cfretl tests
