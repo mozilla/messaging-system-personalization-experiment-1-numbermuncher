@@ -7,6 +7,8 @@ from google.cloud import storage
 from google.cloud.dataproc_v1.gapic.transports import cluster_controller_grpc_transport
 from google.cloud.dataproc_v1.gapic.transports import job_controller_grpc_transport
 
+from cfretl import settings
+
 
 waiting_callback = False
 
@@ -231,13 +233,15 @@ class DataprocFacade:
                     },
                 },
                 "autoscaling_config": {
-                    "policy_uri": "projects/cfr-personalization-experiment/regions/{region:s}/autoscalingPolicies/cfr-personalization-autoscale".format(
-                        region=self._region
+                    "policy_uri": "projects/{gcp_project:s}/regions/{region:s}/autoscalingPolicies/cfr-personalization-autoscale".format(
+                        gcp_project=settings.GCP_PROJECT_ID, region=self._region
                     )
                 },
                 "initialization_actions": [
                     {
-                        "executable_file": "gs://cfr-ml-jobs/actions/python/dataproc_custom.sh"
+                        "executable_file": "gs://{gcs_bucket:s}/actions/python/dataproc_custom.sh".format(
+                            gcs_bucket=settings.GCS_BUCKET_NAME
+                        )
                     }
                 ],
                 "software_config": {"image_version": "1.4.16-ubuntu18"},
