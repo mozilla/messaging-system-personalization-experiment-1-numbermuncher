@@ -32,6 +32,9 @@ GCS_BUCKET_NAME = config("GCS_BUCKET_NAME", "cfr-ml-jobs")
 # The script from cfretl.scripts which will be uploaded into GCS
 DATAPROC_SCRIPT = config("DATAPROC_SCRIPT", "compute_weights.py")
 
+# Override auto subnetwork allocation for custom subnetworks
+DATAPROC_SUBNETWORK_URI = config("DATAPROC_SUBNETWORK_URI", "auto")
+
 # These are names of the RemoteSettings collections in the main bucket
 # None of these should need to be modified.
 CFR_MODEL = config("CFR_MODEL", TEST_PREFIX + "cfr-ml-model")
