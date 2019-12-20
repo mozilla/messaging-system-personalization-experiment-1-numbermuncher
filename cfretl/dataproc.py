@@ -214,6 +214,9 @@ class DataprocFacade:
             "cluster_name": self._cluster_name,
             "project_id": self._project_id,
             "config": {
+                "gce_cluster_config": {
+                    "subnetwork_uri": settings.DATAPROC_SUBNETWORK_URI
+                },
                 "master_config": {
                     "num_instances": 1,
                     "machine_type_uri": "n1-standard-1",
