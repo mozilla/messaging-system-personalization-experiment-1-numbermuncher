@@ -251,6 +251,10 @@ class DataprocFacade:
             },
         }
 
+        # Set the dataproc service account only if we pass it in as env
+        if settings.DATAPROC_SERVICE_ACCOUNT:
+            cluster_config['config']['gce_cluster_config']['service_account'] = settings.DATAPROC_SERVICE_ACCOUNT
+
         cluster = self.dataproc_cluster_client().create_cluster(
             self._project_id, self._region, cluster_config
         )
