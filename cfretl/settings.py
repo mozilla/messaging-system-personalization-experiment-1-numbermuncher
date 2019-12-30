@@ -40,6 +40,6 @@ DATAPROC_SERVICE_ACCOUNT = config("DATAPROC_SERVICE_ACCOUNT", None)
 
 # These are names of the RemoteSettings collections in the main bucket
 # None of these should need to be modified.
-CFR_MODEL = config("CFR_MODEL", TEST_PREFIX + "cfr-ml-model")
+CFR_MODEL = config("CFR_MODEL", TEST_PREFIX + "cfr-ml-models")
 CFR_EXPERIMENTS = config("CFR_EXPERIMENTS", TEST_PREFIX + "cfr-ml-experiments")
 CFR_CONTROL = config("CFR_CONTROL", TEST_PREFIX + "cfr-ml-control")
