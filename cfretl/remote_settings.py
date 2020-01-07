@@ -38,7 +38,7 @@ class SecurityError(Exception):
     pass
 
 
-class RemoteSettingWriteError(Exception):
+class RemoteSettingsError(Exception):
     pass
 
 
@@ -96,6 +96,12 @@ class CFRRemoteSettings:
         kinto_tmpl = "{bucket_path:s}/collections/{id:s}"
         url = kinto_tmpl.format(bucket_path=self._kinto_bucket_path, id=id)
         resp = requests.get(url)
+        if resp.status_code >= 300:
+            raise RemoteSettingsError(
+                "HTTP Status: {}  Response Text: {} URL: {}".format(
+                    resp.status_code, resp.text, url
+                )
+            )
         return resp.status_code >= 200 and resp.status_code < 300
 
     def check_experiment_exists(self):
@@ -235,7 +241,7 @@ class CFRRemoteSettings:
             resp = requests.put(url, json={"data": obj}, auth=auth)
             if resp.status_code > 299:
                 print(
-                    RemoteSettingWriteError(
+                    RemoteSettingsError(
                         "Error cloning CFR record id: {}".format(obj_id)
                     )
                 )
