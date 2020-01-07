@@ -221,6 +221,7 @@ class CFRRemoteSettings:
         resp = self.auth_put(url, jdata)
         if http_status_ok(resp.status_code):
             print("Succesfully wrote RemoteSettings data to {:s}".format(url))
+            print("RemoteSettings payload was {} bytes.".format(len(json.dumps(jdata))))
             return True
 
         # Raise an error so that sentry gets the error message
