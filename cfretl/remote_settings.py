@@ -42,6 +42,10 @@ class RemoteSettingsError(Exception):
     pass
 
 
+def http_status_ok(status_code):
+    return status_code >= 200 and status_code < 300
+
+
 class CFRRemoteSettings:
     """
     This class can manage the Remote Settings server for CFR
@@ -95,10 +99,10 @@ class CFRRemoteSettings:
         url = kinto_tmpl.format(host=settings.KINTO_URI, user=self._kinto_user)
 
         status_code = self.auth_get(url).status_code
-        ok = status_code >= 200 and status_code < 300
+        ok = http_status_ok(status_code)
         if not ok:
             resp = self.auth_put(url, {"data": {"password": self._kinto_pass}})
-            ok = resp.status_code >= 200 and resp.status_code < 300
+            ok = http_status_ok(resp.status_code)
             print("Created user : {:s} {:b}".format(self._kinto_user, ok))
         else:
             print("User {:s} already exists".format(self._kinto_user))
@@ -107,13 +111,13 @@ class CFRRemoteSettings:
         kinto_tmpl = "{bucket_path:s}/collections/{id:s}"
         url = kinto_tmpl.format(bucket_path=self._kinto_bucket_path, id=id)
         resp = self.auth_get(url)
-        if resp.status_code >= 300:
+        if not http_status_ok(resp.status_code):
             raise RemoteSettingsError(
                 "HTTP Status: {}  Response Text: {} URL: {}".format(
                     resp.status_code, resp.text, url
                 )
             )
-        return resp.status_code >= 200 and resp.status_code < 300
+        return http_status_ok(resp.status_code)
 
     def check_experiment_exists(self):
         return self._check_collection_exists(settings.CFR_EXPERIMENTS)
@@ -127,7 +131,7 @@ class CFRRemoteSettings:
     def _create_collection(self, id):
         url = "{bucket_path:s}/collections".format(bucket_path=self._kinto_bucket_path)
         status_code = self.auth_post(url, {"data": {"id": id}}).status_code
-        return status_code >= 200 and status_code < 300
+        return http_status_ok(status_code)
 
     def create_experiment_collection(self):
         return self._create_collection(settings.CFR_EXPERIMENTS)
@@ -215,7 +219,7 @@ class CFRRemoteSettings:
         )
         jdata = {"data": json_data}
         resp = self.auth_put(url, jdata)
-        if resp.status_code == 200:
+        if http_status_ok(resp.status_code):
             print("Succesfully wrote RemoteSettings data to {:s}".format(url))
             return True
 
