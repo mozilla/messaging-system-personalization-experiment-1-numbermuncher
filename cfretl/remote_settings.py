@@ -14,6 +14,7 @@ import json
 import requests
 from requests.auth import HTTPBasicAuth
 
+
 FEATURES_LIST = [
     "about_preferences_non_default_value_count",
     "active_ticks",
@@ -58,8 +59,9 @@ class CFRRemoteSettings:
     """
 
     def __init__(self):
-        self._kinto_uri = settings.KINTO_URI
-        self._kinto_bucket = settings.KINTO_BUCKET
+        self._kinto_bucket_path = "{base_uri:s}/buckets/{bucket:s}".format(
+            base_uri=settings.KINTO_URI, bucket=settings.KINTO_BUCKET
+        )
         self._kinto_user = settings.KINTO_USER
         self._kinto_pass = settings.KINTO_PASS
 
@@ -78,7 +80,7 @@ class CFRRemoteSettings:
 
     def create_user_in_test(self):
         kinto_tmpl = "{host:s}/accounts/{user:s}"
-        url = kinto_tmpl.format(host=self._kinto_uri, user=self._kinto_user)
+        url = kinto_tmpl.format(host=settings.KINTO_URI, user=self._kinto_user)
 
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
         status_code = requests.get(url, auth=auth).status_code
@@ -91,8 +93,8 @@ class CFRRemoteSettings:
             print("User {:s} already exists".format(self._kinto_user))
 
     def _check_collection_exists(self, id):
-        kinto_tmpl = "{host:s}/buckets/{bucket:s}/collections/{id:s}"
-        url = kinto_tmpl.format(host=self._kinto_uri, bucket=self._kinto_bucket, id=id)
+        kinto_tmpl = "{bucket_path:s}/collections/{id:s}"
+        url = kinto_tmpl.format(bucket_path=self._kinto_bucket_path, id=id)
         resp = requests.get(url)
         return resp.status_code >= 200 and resp.status_code < 300
 
@@ -107,7 +109,7 @@ class CFRRemoteSettings:
 
     def _create_collection(self, id):
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
-        url = "{base_uri:s}/buckets/main/collections".format(base_uri=self._kinto_uri)
+        url = "{bucket_path:s}/collections".format(bucket_path=self._kinto_bucket_path)
         status_code = requests.post(
             url, json={"data": {"id": id}}, auth=auth
         ).status_code
@@ -124,8 +126,8 @@ class CFRRemoteSettings:
 
     def _test_read_cfr_control(self):
         try:
-            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
-                base_uri=self._kinto_uri, c_id=settings.CFR_CONTROL
+            url = "{bucket_path:s}/collections/{c_id:s}/records".format(
+                bucket_path=self._kinto_bucket_path, c_id=settings.CFR_CONTROL
             )
             resp = requests.get(url)
             jdata = resp.json()["data"]
@@ -137,8 +139,8 @@ class CFRRemoteSettings:
 
     def _test_read_cfr_experimental(self):
         try:
-            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
-                base_uri=self._kinto_uri, c_id=settings.CFR_EXPERIMENTS
+            url = "{bucket_path:s}/collections/{c_id:s}/records".format(
+                bucket_path=self._kinto_bucket_path, c_id=settings.CFR_EXPERIMENTS
             )
             resp = requests.get(url)
             jdata = resp.json()["data"]
@@ -156,7 +158,10 @@ class CFRRemoteSettings:
         collections.
         """
         try:
-            url = "https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/cfr/records"
+            # Note that this particular URL is only used during
+            # debugging and we really need it to point to production
+            # to get the latest `cfr` collection
+            url = settings.KINTO_PROD_CFR
             resp = requests.get(url)
             jdata = resp.json()
             return jdata["data"]
@@ -171,8 +176,8 @@ class CFRRemoteSettings:
         for testing
         """
         try:
-            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{c_id:s}".format(
-                base_uri=self._kinto_uri, c_id=settings.CFR_MODEL
+            url = "{bucket_path:s}/collections/{c_id:s}/records/{c_id:s}".format(
+                bucket_path=self._kinto_bucket_path, c_id=settings.CFR_MODEL
             )
             resp = requests.get(url)
             jdata = resp.json()["data"]
@@ -187,24 +192,27 @@ class CFRRemoteSettings:
     def write_models(self, json_data):
         if not self.check_model_exists():
             if not self.create_model_collection():
-                raise SecurityError("cfr-ml-model collection could not be created.")
+                raise SecurityError(
+                    "{:s} collection could not be created.".format(settings.CFR_MODEL)
+                )
 
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
-        url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{c_id:s}".format(
-            base_uri=self._kinto_uri, c_id=settings.CFR_MODEL
+        url = "{bucket_path:s}/collections/{c_id:s}/records/{c_id:s}".format(
+            bucket_path=self._kinto_bucket_path, c_id=settings.CFR_MODEL
         )
         jdata = {"data": json_data}
         resp = requests.put(url, json=jdata, auth=auth)
-        status_ok = resp.status_code >= 200 and resp.status_code < 300
+        if resp.status_code == 200:
+            print("Succesfully wrote RemoteSettings data to {:s}".format(url))
+            return True
 
-        print("Wrote data to {:s}: {:b}".format(url, status_ok))
-        if not status_ok:
-            print("Response: {:s}".format(str(resp)))
-        return status_ok
+        # Raise an error so that sentry gets the error message
+        err_msg = "HTTP {:d} - {:s}".format(int(resp.status_code), str(resp.text))
+        raise RemoteSettingWriteError(err_msg)
 
     def cfr_records(self):
-        url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records".format(
-            base_uri=self._kinto_uri, c_id="cfr"
+        url = "{bucket_path:s}/collections/{c_id:s}/records".format(
+            bucket_path=self._kinto_bucket_path, base_uri=settings.KINTO_URI, c_id="cfr"
         )
         resp = requests.get(url)
         jdata = resp.json()["data"]
@@ -219,8 +227,10 @@ class CFRRemoteSettings:
             # the cfr-control bucket
             obj_id = obj["id"]
 
-            url = "{base_uri:s}/buckets/main/collections/{c_id:s}/records/{obj_id:s}".format(
-                base_uri=self._kinto_uri, c_id=c_id, obj_id=obj_id
+            url = "{bucket_path:s}/collections/{c_id:s}/records/{obj_id:s}".format(
+                bucket_path=self._kinto_bucket_path,
+                c_id=c_id,
+                obj_id=obj_id,
             )
             resp = requests.put(url, json={"data": obj}, auth=auth)
             if resp.status_code > 299:

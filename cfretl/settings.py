@@ -16,6 +16,8 @@ KINTO_PASS = config("KINTO_PASS", TEST_PREFIX + "devpass")
 
 KINTO_BUCKET = config("KINTO_BUCKET", "main")
 
+KINTO_PROD_CFR = config("KINTO_PROD_CFR", "https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/cfr/records")
+
 # This specifies the GCP project we are running in
 GCP_PROJECT_ID = config("GCP_PROJECT_ID", "cfr-personalization-experiment")
 
