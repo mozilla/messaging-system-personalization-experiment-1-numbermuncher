@@ -214,7 +214,7 @@ class CFRRemoteSettings:
 
         # Raise an error so that sentry gets the error message
         err_msg = "HTTP {:d} - {:s}".format(int(resp.status_code), str(resp.text))
-        raise RemoteSettingWriteError(err_msg)
+        raise RemoteSettingsError(err_msg)
 
     def cfr_records(self):
         url = "{bucket_path:s}/collections/{c_id:s}/records".format(
