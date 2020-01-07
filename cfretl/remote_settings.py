@@ -59,7 +59,7 @@ class CFRRemoteSettings:
     """
 
     def __init__(self):
-        self._kinto_bucket_path = "{base_uri:s}/buckets/main".format(
+        self._kinto_bucket_path = "{base_uri:s}/buckets/{bucket:s}".format(
             base_uri=settings.KINTO_URI, bucket=settings.KINTO_BUCKET
         )
         self._kinto_user = settings.KINTO_USER
