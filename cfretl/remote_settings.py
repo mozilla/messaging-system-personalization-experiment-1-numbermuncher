@@ -78,15 +78,26 @@ class CFRRemoteSettings:
             )
         return self._schema
 
+    def auth_get(self, url):
+        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
+        return requests.get(url, auth=auth)
+
+    def auth_put(self, url, jdata):
+        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
+        return requests.put(url, json=jdata, auth=auth)
+
+    def auth_post(self, url, jdata):
+        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
+        return requests.post(url, json=jdata, auth=auth)
+
     def create_user_in_test(self):
         kinto_tmpl = "{host:s}/accounts/{user:s}"
         url = kinto_tmpl.format(host=settings.KINTO_URI, user=self._kinto_user)
 
-        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
-        status_code = requests.get(url, auth=auth).status_code
+        status_code = self.auth_get(url).status_code
         ok = status_code >= 200 and status_code < 300
         if not ok:
-            resp = requests.put(url, json={"data": {"password": self._kinto_pass}})
+            resp = self.auth_put(url, {"data": {"password": self._kinto_pass}})
             ok = resp.status_code >= 200 and resp.status_code < 300
             print("Created user : {:s} {:b}".format(self._kinto_user, ok))
         else:
@@ -95,7 +106,7 @@ class CFRRemoteSettings:
     def _check_collection_exists(self, id):
         kinto_tmpl = "{bucket_path:s}/collections/{id:s}"
         url = kinto_tmpl.format(bucket_path=self._kinto_bucket_path, id=id)
-        resp = requests.get(url)
+        resp = self.auth_get(url)
         if resp.status_code >= 300:
             raise RemoteSettingsError(
                 "HTTP Status: {}  Response Text: {} URL: {}".format(
@@ -114,11 +125,8 @@ class CFRRemoteSettings:
         return self._check_collection_exists(settings.CFR_MODEL)
 
     def _create_collection(self, id):
-        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
         url = "{bucket_path:s}/collections".format(bucket_path=self._kinto_bucket_path)
-        status_code = requests.post(
-            url, json={"data": {"id": id}}, auth=auth
-        ).status_code
+        status_code = self.auth_post(url, {"data": {"id": id}}).status_code
         return status_code >= 200 and status_code < 300
 
     def create_experiment_collection(self):
@@ -135,7 +143,7 @@ class CFRRemoteSettings:
             url = "{bucket_path:s}/collections/{c_id:s}/records".format(
                 bucket_path=self._kinto_bucket_path, c_id=settings.CFR_CONTROL
             )
-            resp = requests.get(url)
+            resp = self.auth_get(url)
             jdata = resp.json()["data"]
         except Exception:
             # This method is only used for testing purposes - it's
@@ -148,7 +156,7 @@ class CFRRemoteSettings:
             url = "{bucket_path:s}/collections/{c_id:s}/records".format(
                 bucket_path=self._kinto_bucket_path, c_id=settings.CFR_EXPERIMENTS
             )
-            resp = requests.get(url)
+            resp = self.auth_get(url)
             jdata = resp.json()["data"]
         except Exception:
             # This method is only used for testing purposes - it's
@@ -168,7 +176,7 @@ class CFRRemoteSettings:
             # debugging and we really need it to point to production
             # to get the latest `cfr` collection
             url = settings.KINTO_PROD_CFR
-            resp = requests.get(url)
+            resp = self.auth_get(url)
             jdata = resp.json()
             return jdata["data"]
         except Exception:
@@ -185,7 +193,7 @@ class CFRRemoteSettings:
             url = "{bucket_path:s}/collections/{c_id:s}/records/{c_id:s}".format(
                 bucket_path=self._kinto_bucket_path, c_id=settings.CFR_MODEL
             )
-            resp = requests.get(url)
+            resp = self.auth_get(url)
             jdata = resp.json()["data"]
             del jdata["id"]
             del jdata["last_modified"]
@@ -202,12 +210,11 @@ class CFRRemoteSettings:
                     "{:s} collection could not be created.".format(settings.CFR_MODEL)
                 )
 
-        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
         url = "{bucket_path:s}/collections/{c_id:s}/records/{c_id:s}".format(
             bucket_path=self._kinto_bucket_path, c_id=settings.CFR_MODEL
         )
         jdata = {"data": json_data}
-        resp = requests.put(url, json=jdata, auth=auth)
+        resp = self.auth_put(url, jdata)
         if resp.status_code == 200:
             print("Succesfully wrote RemoteSettings data to {:s}".format(url))
             return True
@@ -220,25 +227,21 @@ class CFRRemoteSettings:
         url = "{bucket_path:s}/collections/{c_id:s}/records".format(
             bucket_path=self._kinto_bucket_path, base_uri=settings.KINTO_URI, c_id="cfr"
         )
-        resp = requests.get(url)
+        resp = self.auth_get(url)
         jdata = resp.json()["data"]
         cfr_records = jdata["data"]
         return cfr_records
 
     def _clone_cfr_to(self, cfr_data, c_id):
-        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
-
         for obj in cfr_data:
             # Extract the record ID so we can address it directly into
             # the cfr-control bucket
             obj_id = obj["id"]
 
             url = "{bucket_path:s}/collections/{c_id:s}/records/{obj_id:s}".format(
-                bucket_path=self._kinto_bucket_path,
-                c_id=c_id,
-                obj_id=obj_id,
+                bucket_path=self._kinto_bucket_path, c_id=c_id, obj_id=obj_id
             )
-            resp = requests.put(url, json={"data": obj}, auth=auth)
+            resp = self.auth_put(url, {"data": obj})
             if resp.status_code > 299:
                 print(
                     RemoteSettingsError(
