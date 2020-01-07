@@ -14,6 +14,7 @@ import json
 import requests
 from requests.auth import HTTPBasicAuth
 
+
 FEATURES_LIST = [
     "about_preferences_non_default_value_count",
     "active_ticks",
@@ -201,12 +202,13 @@ class CFRRemoteSettings:
         )
         jdata = {"data": json_data}
         resp = requests.put(url, json=jdata, auth=auth)
-        status_ok = resp.status_code >= 200 and resp.status_code < 300
+        if resp.status_code == 200:
+            print("Succesfully wrote RemoteSettings data to {:s}".format(url))
+            return True
 
-        print("Wrote data to {:s}: {:b}".format(url, status_ok))
-        if not status_ok:
-            print("Response: {:s}".format(str(resp)))
-        return status_ok
+        # Raise an error so that sentry gets the error message
+        err_msg = "HTTP {:d} - {:s}".format(int(resp.status_code), str(resp.text))
+        raise RemoteSettingWriteError(err_msg)
 
     def cfr_records(self):
         url = "{bucket_path:s}/collections/{c_id:s}/records".format(
