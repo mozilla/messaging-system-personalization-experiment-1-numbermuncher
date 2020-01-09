@@ -94,6 +94,29 @@ class CFRRemoteSettings:
         auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
         return requests.post(url, json=jdata, auth=auth)
 
+    def approve_collection(self, collection):
+        """
+        Apply HTTP PATCH to a collection to indicate the collection
+        has breen signed.
+        """
+        auth = HTTPBasicAuth(self._kinto_user, self._kinto_pass)
+        url = "{bucket_path:s}/collections/{c_id:s}".format(
+            bucket_path=self._kinto_bucket_path, c_id=collection
+        )
+
+        resp = requests.patch(url, json={"data": {"status": "to-sign"}}, auth=auth)
+
+        if not http_status_ok(resp.status_code):
+            err_msg = "Signing Approval failed! HTTP {:d} - {:s}".format(
+                int(resp.status_code), str(resp.text)
+            )
+            raise RemoteSettingsError(err_msg)
+
+        print(
+            "Approval was succesful.  HTTP PATCH response: {}".format(resp.status_code)
+        )
+        return http_status_ok(resp.status_code)
+
     def create_user_in_test(self):
         kinto_tmpl = "{host:s}/accounts/{user:s}"
         url = kinto_tmpl.format(host=settings.KINTO_URI, user=self._kinto_user)
@@ -219,14 +242,14 @@ class CFRRemoteSettings:
         )
         jdata = {"data": json_data}
         resp = self.auth_put(url, jdata)
-        if http_status_ok(resp.status_code):
-            print("Succesfully wrote RemoteSettings data to {:s}".format(url))
-            print("RemoteSettings payload was {} bytes.".format(len(json.dumps(jdata))))
-            return True
+        if not http_status_ok(resp.status_code):
+            # Raise an error so that sentry gets the error message
+            err_msg = "HTTP {:d} - {:s}".format(int(resp.status_code), str(resp.text))
+            raise RemoteSettingsError(err_msg)
 
-        # Raise an error so that sentry gets the error message
-        err_msg = "HTTP {:d} - {:s}".format(int(resp.status_code), str(resp.text))
-        raise RemoteSettingsError(err_msg)
+        print("Succesfully wrote RemoteSettings data to {:s}".format(url))
+        print("RemoteSettings payload was {} bytes.".format(len(json.dumps(jdata))))
+        return self.approve_collection(settings.CFR_MODEL)
 
     def cfr_records(self):
         url = "{bucket_path:s}/collections/{c_id:s}/records".format(
