@@ -8,7 +8,7 @@ from decouple import config
 # to prevent midair collisions testing with devuser/devpass
 TEST_PREFIX = config("TEST_PREFIX", "")
 
-SENTRY_DSN = config("SENTRY_DSN", '')
+SENTRY_DSN = config("SENTRY_DSN", "")
 
 KINTO_URI = config("KINTO_URI", "https://kinto.dev.mozaws.net/v1")
 KINTO_USER = config("KINTO_USER", TEST_PREFIX + "devuser")
@@ -16,7 +16,10 @@ KINTO_PASS = config("KINTO_PASS", TEST_PREFIX + "devpass")
 
 KINTO_BUCKET = config("KINTO_BUCKET", "main")
 
-KINTO_PROD_CFR = config("KINTO_PROD_CFR", "https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/cfr/records")
+KINTO_PROD_CFR = config(
+    "KINTO_PROD_CFR",
+    "https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/cfr/records",
+)
 
 # This specifies the GCP project we are running in
 GCP_PROJECT_ID = config("GCP_PROJECT_ID", "cfr-personalization-experiment")
@@ -35,7 +38,7 @@ GCS_BUCKET_NAME = config("GCS_BUCKET_NAME", "cfr-ml-jobs")
 DATAPROC_SCRIPT = config("DATAPROC_SCRIPT", "compute_weights.py")
 
 # Override auto subnetwork allocation for custom subnetworks
-DATAPROC_SUBNETWORK_URI = config("DATAPROC_SUBNETWORK_URI", "auto")
+DATAPROC_SUBNETWORK_URI = config("DATAPROC_SUBNETWORK_URI", "default")
 
 # Override default dataproc service account
 DATAPROC_SERVICE_ACCOUNT = config("DATAPROC_SERVICE_ACCOUNT", None)
