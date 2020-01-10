@@ -3,7 +3,7 @@
 include envfile
 export $(shell sed 's/=.*//' envfile)
 
-all: auth import_policy upload build run
+all:
 
 auth:
 	gcloud auth application-default login
