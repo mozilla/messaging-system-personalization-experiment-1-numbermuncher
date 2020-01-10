@@ -27,6 +27,7 @@ import_policy:
 run:
 	# Spin up the docker instance to write out model weights
 	docker run -v ~/.config:/app/.config \
+		-e GCLOUD_PROJECT=cfr-personalization-project \
 		-it cfr-numbermuncher:latest
 
 run_gcr:
