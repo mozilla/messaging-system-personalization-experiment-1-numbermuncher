@@ -134,12 +134,8 @@ class CFRRemoteSettings:
         kinto_tmpl = "{bucket_path:s}/collections/{id:s}"
         url = kinto_tmpl.format(bucket_path=self._kinto_bucket_path, id=id)
         resp = self.auth_get(url)
-        if not http_status_ok(resp.status_code):
-            raise RemoteSettingsError(
-                "HTTP Status: {}  Response Text: {} URL: {}".format(
-                    resp.status_code, resp.text, url
-                )
-            )
+        # An HTTP error here does not indicate a failure, rather the
+        # collection simply does not exist.
         return http_status_ok(resp.status_code)
 
     def check_experiment_exists(self):
